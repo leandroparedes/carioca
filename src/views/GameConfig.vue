@@ -35,16 +35,16 @@ export default {
     data: function () {
         return {
             games: [
-                { name: '2 Trios', minutes: 5 },
-                { name: '1 Escala 1 Trio', minutes: 5 },
-                { name: '2 Escalas', minutes: 5 },
-                { name: '3 Trios', minutes: 5 },
-                { name: '2 Trios 1 Escala', minutes: 5 },
-                { name: '2 Escalas 1 Trio', minutes: 5 },
-                { name: '4 Trios', minutes: 5 },
-                { name: '3 Escalas', minutes: 5 },
-                { name: 'Escala mariposa', minutes: 5 },
-                 { name: 'Escala Real', minutes: 5 }
+                { id: 1, name: '2 Trios', minutes: 5 },
+                { id: 2, name: '1 Escala 1 Trio', minutes: 5 },
+                { id: 3, name: '2 Escalas', minutes: 5 },
+                { id: 4, name: '3 Trios', minutes: 5 },
+                { id: 5, name: '2 Trios 1 Escala', minutes: 5 },
+                { id: 6, name: '2 Escalas 1 Trio', minutes: 5 },
+                { id: 7, name: '4 Trios', minutes: 5 },
+                { id: 8, name: '3 Escalas', minutes: 5 },
+                { id: 9, name: 'Escala mariposa', minutes: 5 },
+                 { id: 10, name: 'Escala Real', minutes: 5 }
             ],
             loading: false
         }
@@ -53,6 +53,7 @@ export default {
         next: function () {
             this.loading = true;
             this.$store.commit('add_games', this.games);
+            this.$router.push('/game/1');
         }
     }
 }
