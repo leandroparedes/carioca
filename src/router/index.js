@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Players from '@/views/Players.vue';
 import GameConfig from '@/views/GameConfig.vue';
+import Game from '@/views/Game.vue';
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,11 @@ const routes = [
         path: '/game-config',
         name: 'game-config',
         component: GameConfig
+    },
+    {
+        path: '/game/:id',
+        name: 'game',
+        component: Game
     }
 ]
 

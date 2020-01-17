@@ -24,9 +24,30 @@ export default new Vuex.Store({
             games.map(game => {
                 state.games.push(game);
             });
+        },
+        set_left_time (state, data) {
+            let currentPlayer = state.players.find(player => player.pos == data.pos);
+            currentPlayer.leftTime = data.leftTime;
+        },
+        out_player (state, pos) {
+            let currentPlayer = state.players.find(player => player.pos == pos);
+            currentPlayer.status = 'out';
+
+            // re arrange positions
         }
     },
     actions: {
+    },
+    getters: {
+        gameById: (state) => (id) => {
+            return state.games.find(game => game.id == id);
+        },
+        playerByPos: (state) => (pos) => {
+            return state.players.find(player => player.pos == pos && player.status != 'out')
+        },
+        playersLength: (state) => {
+            return state.players.filter(player => player.status != 'out').length;
+        }
     },
     modules: {
     }

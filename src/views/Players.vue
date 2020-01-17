@@ -48,7 +48,10 @@ export default {
         addPlayer: function () {
             if (this.player.name.length > 0) {
                 this.players.push({
-                    name: this.player.name
+                    name: this.player.name,
+                    pos: this.players.length,
+                    leftTime: null,
+                    status: 'playing'
                 });
                 this.player.name = '';
                 this.$nextTick(() => this.$refs.player.focus());

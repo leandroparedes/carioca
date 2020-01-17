@@ -14,7 +14,7 @@
                     <input
                         type="number" min="1"
                         class="text-gray-800 rounded text-2xl font-semibold p-2 w-full"
-                        v-model="game.minutes"
+                        v-model="game.secs"
                     >
                 </div>
             </div>
@@ -35,16 +35,16 @@ export default {
     data: function () {
         return {
             games: [
-                { id: 1, name: '2 Trios', minutes: 5 },
-                { id: 2, name: '1 Escala 1 Trio', minutes: 5 },
-                { id: 3, name: '2 Escalas', minutes: 5 },
-                { id: 4, name: '3 Trios', minutes: 5 },
-                { id: 5, name: '2 Trios 1 Escala', minutes: 5 },
-                { id: 6, name: '2 Escalas 1 Trio', minutes: 5 },
-                { id: 7, name: '4 Trios', minutes: 5 },
-                { id: 8, name: '3 Escalas', minutes: 5 },
-                { id: 9, name: 'Escala mariposa', minutes: 5 },
-                 { id: 10, name: 'Escala Real', minutes: 5 }
+                { id: 1, name: '2 Trios', secs: 300 },
+                { id: 2, name: '1 Escala 1 Trio', secs: 300 },
+                { id: 3, name: '2 Escalas', secs: 300 },
+                { id: 4, name: '3 Trios', secs: 300 },
+                { id: 5, name: '2 Trios 1 Escala', secs: 300 },
+                { id: 6, name: '2 Escalas 1 Trio', secs: 300 },
+                { id: 7, name: '4 Trios', secs: 300 },
+                { id: 8, name: '3 Escalas', secs: 300 },
+                { id: 9, name: 'Escala mariposa', secs: 300 },
+                 { id: 10, name: 'Escala Real', secs: 300 }
             ],
             loading: false
         }
