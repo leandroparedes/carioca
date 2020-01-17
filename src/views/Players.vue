@@ -57,7 +57,7 @@ export default {
             if (this.players.length >= 2) {
                 this.loading = true;
                 this.$store.commit('add_players', this.players);
-                this.$router.push('/config');
+                this.$router.push('/game-config');
             }
         }
     }
