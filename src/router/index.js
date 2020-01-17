@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Players from '@/views/Players.vue';
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+        redirect: '/players'
+    },
+    {
+        path: '/players',
+        name: 'players',
+        component: Players
   },
   {
     path: '/about',

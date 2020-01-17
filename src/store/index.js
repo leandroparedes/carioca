@@ -6,12 +6,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     plugins: [createPersistedState()],
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+    state: {
+        players: []
+    },
+    mutations: {
+        add_players (state, players) {
+            players.map(player => {
+                state.players.push(player);
+            })
+        }
+    },
+    actions: {
+    },
+    modules: {
+    }
 })
