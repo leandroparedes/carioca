@@ -11,6 +11,10 @@ export default new Vuex.Store({
         games: []
     },
     mutations: {
+        reset (state) {
+            state.players = [];
+            state.games = [];
+        },
         add_players (state, players) {
             players.map(player => {
                 state.players.push(player);
