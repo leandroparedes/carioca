@@ -7,13 +7,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     plugins: [createPersistedState()],
     state: {
-        players: []
+        players: [],
+        games: []
     },
     mutations: {
         add_players (state, players) {
             players.map(player => {
                 state.players.push(player);
             })
+        },
+        add_games (state, games) {
+            games.map(game => {
+                state.games.push(game);
+            });
         }
     },
     actions: {
