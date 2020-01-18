@@ -4,7 +4,7 @@
 
         <div class="flex mb-4 -mx-2">
             <div class="w-3/4 px-2">Juego</div>
-            <div class="w-1/4 px-2">Minutos</div>
+            <div class="w-1/4 px-2">Segundos</div>
         </div>
 
         <div v-for="(game, index) in games" :key="index" class="text-3xl font-semibold">
@@ -44,7 +44,7 @@ export default {
                 { id: 7, name: '4 Trios', secs: 300 },
                 { id: 8, name: '3 Escalas', secs: 300 },
                 { id: 9, name: 'Escala mariposa', secs: 300 },
-                 { id: 10, name: 'Escala Real', secs: 300 }
+                { id: 10, name: 'Escala Real', secs: 300 }
             ],
             loading: false
         }
@@ -53,7 +53,10 @@ export default {
         next: function () {
             this.loading = true;
             this.$store.commit('add_games', this.games);
-            this.$router.push('/game/1');
+            this.$router.push({
+                path: '/game/1',
+                query: { player: 1 }
+            });
         }
     }
 }
