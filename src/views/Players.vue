@@ -14,7 +14,7 @@
             </div>
             <div class="w-1/3 px-2">
                 <button
-                    class="bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 focus:outline-none font-bold px-3 py-2 rounded text-2xl w-full"
+                    class="bg-blue-600 text-white hover:bg-blue-700 focus:bg-blue-700 focus:outline-none font-bold px-3 py-2 rounded text-2xl w-full"
                     @click="addPlayer"
                 >
                     Add
