@@ -17,10 +17,9 @@
             class="w-full min-h-screen text-2xl font-bold text-white focus:outline-none"
             @click="finishTurn"
             :disabled="paused"
+            :class="{'opacity-25': paused}"
         >
             <div class="-mt-48">
-                <div v-if="paused" class="text-6xl font-thin mt-16">Pausado</div>
-
                 <div class="text-xl pt-3 text-gray-500">{{ game.name }}</div>
 
                 <div v-if="!currentPlayerLost">
