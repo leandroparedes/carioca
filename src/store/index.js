@@ -83,7 +83,7 @@ export default new Vuex.Store({
             getters.allPlayers.map(player => {
                 commit('set_timer', {
                     playerId: player.id,
-                    timeLeft: gameSecs
+                    timeLeft: player.timeLeft || gameSecs
                 });
             });
         }
