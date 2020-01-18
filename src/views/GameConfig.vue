@@ -2,6 +2,11 @@
     <div class="px-4">
         <h1 class="text-center text-6xl font-semibold mb-3">Juegos</h1>
 
+        <div class="mb-8 flex justify-between">
+            <button class="bg-green-500 text-white rounded px-2 py-1 font-semibold" @click="games.forEach(game => game.mins++)">Añadir un minuto</button>
+            <button class="bg-red-500 text-white rounded px-2 py-1 font-semibold" @click="games.forEach(game => game.mins--)">Quitar un minuto</button>
+        </div>
+
         <div class="flex mb-4 -mx-2">
             <div class="w-3/4 px-2">Juego</div>
             <div class="w-1/4 px-2">Minutos</div>
