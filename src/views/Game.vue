@@ -21,7 +21,7 @@
             v-if="!savingResults"
         >
             <div class="-mt-48">
-                <div v-if="paused" class="text-6xl font-thin">Pausado</div>
+                <div v-if="paused" class="text-6xl font-thin mt-16">Pausado</div>
 
                 <div class="text-xl pt-3 text-gray-500">{{ game.name }}</div>
 
@@ -109,7 +109,7 @@ export default {
             });
 
             let gameId = this.game.id + 1;
-            let nextPlayerId = this.currentPlayer.id + 1;
+            let nextPlayerId = parseInt(this.$route.query.player) + 1;
 
             if (nextPlayerId > this.$store.state.players.length) {
                 nextPlayerId = 1;
