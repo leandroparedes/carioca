@@ -9,13 +9,17 @@ export default new Vuex.Store({
     state: {
         players: [],
         games: [],
-        results: []
+        results: [],
+        current_game: null,
+        current_player: null
     },
     mutations: {
         reset (state) {
             state.players = [];
             state.games = [];
             state.results = [];
+            state.current_game = null;
+            state.current_player = null;
         },
         add_players (state, players) {
             players.map(player => {
@@ -31,8 +35,22 @@ export default new Vuex.Store({
             let player = state.players.find(player => player.id == data.playerId);
             player.timeLeft = data.timeLeft;
         },
-        save_result(state, data) {
+        save_result (state, data) {
             state.results.push(data);
+        },
+        save_current_game (state, game) {
+            state.current_game = game;
+        },
+        save_current_player (state, player) {
+            state.current_player = player;
+        },
+        clear (state) {
+            state.current_game = null;
+            state.current_player = null;
+
+            state.players.map(player => {
+                player.timeLeft = null
+            });
         }
     },
     getters: {
@@ -83,10 +101,18 @@ export default new Vuex.Store({
             getters.allPlayers.map(player => {
                 commit('set_timer', {
                     playerId: player.id,
-                    timeLeft: player.timeLeft || gameSecs
+                    timeLeft: player.timeLeft != null ? player.timeLeft : gameSecs
                 });
             });
-        }
+        },
+        current_game ({ commit, getters }, gameId) {
+            const game = getters.gameById(gameId);
+            commit('save_current_game', game);
+        },
+        current_player ({ commit, getters }, playerId) {
+            const player = getters.playerById(playerId);
+            commit('save_current_player', player);
+        },
     },
     modules: {
     }
