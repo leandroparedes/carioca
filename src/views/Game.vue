@@ -62,7 +62,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('set_timers', this.game.secs);
+        this.$store.dispatch('set_timers', this.game.mins * 60);
         this.$store.dispatch('current_game', this.game.id);
         this.$store.dispatch('current_player', this.currentPlayer.id);
 
