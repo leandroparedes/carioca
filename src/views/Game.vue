@@ -123,6 +123,12 @@ export default {
         },
         toggleSaveResults: function () {
             this.savingResults = !this.savingResults;
+            this.paused = true;
+            this.$store.commit('set_timer', {
+                playerId: this.currentPlayer.id,
+                timeLeft: this.currentPlayer.timeLeft
+            });
+            clearInterval(this.currentPlayerInterval);
         },
         togglePause: function () {
             this.$store.commit('set_timer', {
