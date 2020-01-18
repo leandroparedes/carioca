@@ -27,7 +27,7 @@
 
         <div class="flex my-5 -mx-2">
             <div class="w-2/3 px-2">
-                <input type="text" v-model="game.name" class="text-gray-800 rounded text-2xl font-semibold p-2 w-full" ref="player">
+                <input type="text" v-model="game.name" class="text-gray-800 rounded text-2xl font-semibold p-2 w-full" placeholder="Añadir nuevo juego">
             </div>
             <div class="w-1/3 px-2">
                 <button
@@ -79,6 +79,7 @@ export default {
                     name: this.game.name,
                     mins: 5
                 });
+                this.game.name = '';
             }
         },
         next: function () {

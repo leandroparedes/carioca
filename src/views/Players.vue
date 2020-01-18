@@ -10,7 +10,7 @@
 
         <div class="flex mb-5 -mx-2">
             <div class="w-2/3 px-2">
-                <input type="text" v-model="player.name" class="text-gray-800 rounded text-2xl font-semibold p-2 w-full" ref="player">
+                <input type="text" v-model="player.name" class="text-gray-800 rounded text-2xl font-semibold p-2 w-full" ref="player" placeholder="Añadir un jugador">
             </div>
             <div class="w-1/3 px-2">
                 <button
