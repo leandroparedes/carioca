@@ -55,7 +55,13 @@ export default {
             this.$store.commit('clear');
 
             if (gameId <= this.$store.state.games.length) {
-                window.location.href = `/game/${gameId}?player=${nextPlayerId}`;
+                this.$router.push({
+                    path: '/preptime',
+                    query: {
+                        nextGame: gameId,
+                        player: nextPlayerId
+                    }
+                });
             } else {
                 window.location.href = `/results`;
             }

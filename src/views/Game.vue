@@ -20,7 +20,8 @@
             :class="{'opacity-25': paused}"
         >
             <div class="-mt-48">
-                <div class="text-xl pt-3 text-gray-500">{{ game.name }}</div>
+                <small class="text-gray-600 text-sm">Juego {{ $route.params.id }} </small>
+                <div class="text-2xl text-gray-500">{{ game.name }}</div>
 
                 <div v-if="!currentPlayerLost">
                     <div :class="textColor" v-if="!onlyOnePLayerLeft">

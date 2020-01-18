@@ -85,10 +85,15 @@ export default {
         next: function () {
             this.loading = true;
             this.$store.commit('add_games', this.games);
+            
             this.$router.push({
-                path: '/game/1',
-                query: { player: 1 }
+                path: '/preptime',
+                query: {
+                    nextGame: 1,
+                    player: 1
+                }
             });
+            // mandar a /prep?next-game=1&player=1
         }
     }
 }

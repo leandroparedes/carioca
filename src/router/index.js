@@ -5,6 +5,7 @@ import GameConfig from '@/views/GameConfig.vue';
 import Game from '@/views/Game.vue';
 import Results from '@/views/Results.vue';
 import GameResults from '@/views/GameResults.vue';
+import PrepTime from '@/views/PrepTime.vue';
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,11 @@ const routes = [
         path: '/game/:id/results',
         name: 'game-results',
         component: GameResults
+    },
+    {
+        path: '/preptime',
+        name: 'prep-time',
+        component: PrepTime
     }
 ]
 
