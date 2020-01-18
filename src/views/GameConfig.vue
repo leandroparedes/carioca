@@ -25,6 +25,20 @@
             </div>
         </div>
 
+        <div class="flex my-5 -mx-2">
+            <div class="w-2/3 px-2">
+                <input type="text" v-model="game.name" class="text-gray-800 rounded text-2xl font-semibold p-2 w-full" ref="player">
+            </div>
+            <div class="w-1/3 px-2">
+                <button
+                    class="bg-blue-600 text-white hover:bg-blue-700 focus:bg-blue-700 focus:outline-none font-bold px-3 py-2 rounded text-2xl w-full"
+                    @click="addGame"
+                >
+                    Add
+                </button>
+            </div>
+        </div>
+
         <button
             class="bg-green-600 text-4xl rounded px-1 py-2 font-bold w-full text-white my-4"
             @click="next"
@@ -39,6 +53,9 @@
 export default {
     data: function () {
         return {
+            game: {
+                name: ''
+            },
             games: [
                 { id: 1, name: '2 Trios', mins: 5 },
                 { id: 2, name: '1 Trio 1 Escala', mins: 5 },
@@ -55,6 +72,15 @@ export default {
         }
     },
     methods: {
+        addGame: function () {
+            if (this.game.name.length) {
+                this.games.push({
+                    id: this.games.length + 1,
+                    name: this.game.name,
+                    mins: 5
+                });
+            }
+        },
         next: function () {
             this.loading = true;
             this.$store.commit('add_games', this.games);
