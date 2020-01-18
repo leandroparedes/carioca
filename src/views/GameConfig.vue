@@ -36,7 +36,7 @@ export default {
         return {
             games: [
                 { id: 1, name: '2 Trios', mins: 5 },
-                { id: 2, name: '1 Escala 1 Trio', mins: 5 },
+                { id: 2, name: '1 Trio 1 Escala', mins: 5 },
                 { id: 3, name: '2 Escalas', mins: 5 },
                 { id: 4, name: '3 Trios', mins: 5 },
                 { id: 5, name: '2 Trios 1 Escala', mins: 5 },
