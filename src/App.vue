@@ -12,8 +12,10 @@
 export default {
     methods: {
         reset: function () {
-            this.$store.commit('reset');
-            this.$router.push('/');
+            if (confirm('¿Estás seguro de resetear el juego?')) {
+                this.$store.commit('reset');
+                this.$router.push('/');
+            }
         }
     }
 }
