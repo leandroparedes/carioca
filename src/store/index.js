@@ -43,7 +43,7 @@ export default new Vuex.Store({
             return state.players.find(player => player.id == id);
         },
         nextPlayer: (state) => (id) => {
-            let validPlayers = state.players.filter(player => player.timeLeft > 0 || player.timeLeft == null);
+            let validPlayers = state.players.filter(player => player.timeLeft > 0);
 
             let index = validPlayers.indexOf(state.players.find(player => player.id == id));
 
@@ -54,7 +54,7 @@ export default new Vuex.Store({
             return validPlayers[index + 1];
         },
         playersLeft: (state) => {
-            return state.players.filter(player => player.timeLeft > 0 || player.timeLeft == null).length
+            return state.players.filter(player => player.timeLeft > 0).length
         },
         otherPlayers: (state) => (id) => {
             return state.players.filter(player => player.id != id);
