@@ -1,39 +1,51 @@
 <template>
     <div>
         <div class="flex justify-between">
-            <button v-if="!isOver && !isFinished" class="bg-green-500 font-bold p-2 text-white rounded m-2" @click="togglePause">
+            <button v-if="!onlyOnePLayerLeft && !savingResults" class="bg-green-500 font-bold p-2 text-white rounded m-2" @click="togglePause">
                 {{ paused ? 'Reanudar' : 'Pausar' }}
             </button>
-            <button class="bg-yellow-500 font-bold p-2 text-white rounded m-2" @click="finishGame" v-if="!isFinished">Terminar</button>
-            <button v-else class="bg-red-500 font-bold p-2 text-white rounded m-2" @click="cancel">Cancelar</button>
+
+            <button
+                class="font-bold p-2 text-white rounded m-2"
+                :class="{'bg-red-500': savingResults, 'bg-yellow-500': !savingResults}"
+                @click="toggleSaveResults"
+            >
+                {{ savingResults ? 'Cancelar' : 'Terminar' }}
+            </button>
         </div>
+
         <button
             class="w-full min-h-screen text-2xl font-bold text-white focus:outline-none"
             @click="finishTurn"
             :disabled="paused"
-            v-if="!isFinished"
+            v-if="!savingResults"
         >
             <div class="-mt-48">
                 <div v-if="paused" class="text-6xl font-thin">Pausado</div>
 
                 <div class="text-xl pt-3 text-gray-500">{{ game.name }}</div>
 
-                <div :class="textColor" v-if="!isOver">
+                <div v-if="!currentPlayerLost">
+                    <div :class="textColor" v-if="!onlyOnePLayerLeft">
                     <h1 class="text-6xl font-bold">{{ currentPlayer.name.toUpperCase() }}</h1>
                     <div class="text-6xl font-black mb-10">
                         {{ currentPlayer.timeLeft }}
                     </div>
+                    </div>
+                    <div v-else>
+                        <div class="text-3xl mt-4">Ganador</div>
+                        <h1 class="text-6xl font-bold text-green-500 mb-10">{{ currentPlayer.name.toUpperCase() }}</h1>
+                    </div>
                 </div>
-                <div v-else>
-                    <div class="text-3xl mt-4">Ganador</div>
-                    <h1 class="text-6xl font-bold text-green-500 mb-10">{{ currentPlayer.name.toUpperCase() }}</h1>
+                <div v-else class="px-4">
+                    <img src="../assets/images/heh.jpeg" alt="heh">
                 </div>
 
                 <div
                     v-for="player in $store.getters.otherPlayers(currentPlayer.id)" :key="player.id"
-                    class="font-normal" :class="{'text-red-500': player.timeLeft <= 0 && player.timeLeft != null}"
+                    class="font-normal" :class="{'text-red-500': player.timeLeft <= 30}"
                 >
-                    {{ player.name }} {{ player.timeLeft == null ? game.secs : player.timeLeft }}
+                    {{ player.name }} {{ player.timeLeft }}
                 </div>
             </div>
         </button>
@@ -62,10 +74,10 @@ export default {
             game: this.$store.getters.gameById(this.$route.params.id),
             currentPlayer: this.$store.getters.playerById(this.$route.query.player),
             currentPlayerInterval: null,
-            isOver: false,
-            currentPlayerLose: false,
+            currentPlayerLost: false,
+            onlyOnePLayerLeft: false,
             paused: false,
-            isFinished: false,
+            savingResults: false,
             results: {
                 players: {}
             }
@@ -74,20 +86,22 @@ export default {
     mounted() {
         this.$store.dispatch('set_timers', this.game.secs);
 
-        this.currentPlayerInterval = setInterval(() => {
-
-            if (this.currentPlayer.timeLeft <= 0) {
-                clearInterval(this.currentPlayerInterval);
-                return;
-            }
-
-            this.$set(this.currentPlayer, 'timeLeft', --this.currentPlayer.timeLeft);
-        }, 1000);
+        this.initInterval();
     },
     beforeDestroy() {
         clearInterval(this.currentPlayerInterval);
     },
     methods: {
+        initInterval: function () {
+            this.currentPlayerInterval = setInterval(() => {
+                if (this.currentPlayer.timeLeft <= 0) {
+                    clearInterval(this.currentPlayerInterval);
+                    this.currentPlayerLost = true;
+                    return;
+                }
+                this.$set(this.currentPlayer, 'timeLeft', --this.currentPlayer.timeLeft);
+            }, 1000);
+        },
         save: function () {
             this.$store.dispatch('save_results', {
                 results: this.results.players,
@@ -107,11 +121,8 @@ export default {
                 window.location.href = `/results`;
             }
         },
-        finishGame: function () {
-            this.isFinished = true;
-        },
-        cancel: function () {
-            this.isFinished = false;
+        toggleSaveResults: function () {
+            this.savingResults = !this.savingResults;
         },
         togglePause: function () {
             this.$store.commit('set_timer', {
@@ -124,20 +135,12 @@ export default {
             if (this.paused) {
                 clearInterval(this.currentPlayerInterval);
             } else {
-                this.currentPlayerInterval = setInterval(() => {
-                    if (this.currentPlayer.timeLeft <= 0) {
-                        clearInterval(this.currentPlayerInterval);
-                        this.currentPlayerLose = true;
-                        return;
-                    }
-                    this.$set(this.currentPlayer, 'timeLeft', --this.currentPlayer.timeLeft);
-                }, 1000);
+                this.initInterval();
             }
             
         },
         finishTurn: function () {
-            this.currentPlayerLose = false;
-            
+            this.currentPlayerLost = false;
             // guardamos el tiempo actualizado del jugador
             this.$store.commit('set_timer', {
                 playerId: this.currentPlayer.id,
@@ -153,24 +156,17 @@ export default {
             // seteamos el tiempo del jugador nuevo
             this.$store.commit('set_timer', {
                 playerId: this.currentPlayer.id,
-                timeLeft: this.currentPlayer.timeLeft != null ? this.currentPlayer.timeLeft : this.game.secs
+                timeLeft: this.currentPlayer.timeLeft
             });
 
             if (this.$store.getters.playersLeft == 1) {
                 clearInterval(this.currentPlayerInterval);
-                this.isOver = true;
+                this.onlyOnePLayerLeft = true;
                 return;
             }
 
             // iniciamos el intervalo de ese jugador
-            this.currentPlayerInterval = setInterval(() => {
-                if (this.currentPlayer.timeLeft <= 0) {
-                    clearInterval(this.currentPlayerInterval);
-                    this.currentPlayerLose = true;
-                    return;
-                }
-                this.$set(this.currentPlayer, 'timeLeft', --this.currentPlayer.timeLeft);
-            }, 1000);
+            this.initInterval();
         }
     },
     computed: {
