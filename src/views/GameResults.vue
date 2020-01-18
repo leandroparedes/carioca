@@ -36,6 +36,10 @@ export default {
     },
     methods: {
         save: function () {
+            if (Object.entries(this.results.players).length < this.$store.state.players.length) {
+                return;
+            }
+            
             this.$store.dispatch('save_results', {
                 results: this.results.players,
                 gameId: this.game.id
