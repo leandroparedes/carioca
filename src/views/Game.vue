@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="flex justify-between">
-            <button v-if="!onlyOnePLayerLeft && !savingResults" class="bg-green-500 font-bold p-2 text-white rounded m-2" @click="togglePause">
+            <button v-if="!onlyOnePLayerLeft && !savingResults" class="text-green-500 font-bold focus:outline-none pl-2 pt-2" @click="togglePause">
                 {{ paused ? 'Reanudar' : 'Pausar' }}
             </button>
 
             <button
-                class="font-bold p-2 text-white rounded m-2"
-                :class="{'bg-red-500': savingResults, 'bg-yellow-500': !savingResults}"
+                class="font-bold px-2 pt-2 focus:outline-none"
+                :class="{'text-red-500': savingResults, 'text-yellow-500': !savingResults}"
                 @click="toggleSaveResults"
             >
                 {{ savingResults ? 'Cancelar' : 'Terminar' }}
@@ -29,7 +29,7 @@
                     <div :class="textColor" v-if="!onlyOnePLayerLeft">
                     <h1 class="text-6xl font-bold">{{ currentPlayer.name.toUpperCase() }}</h1>
                     <div class="text-6xl font-black mb-10">
-                        {{ currentPlayer.timeLeft }}
+                        {{ formatTime(currentPlayer.timeLeft) }}
                     </div>
                     </div>
                     <div v-else>
@@ -45,7 +45,7 @@
                     v-for="player in $store.getters.otherPlayers(currentPlayer.id)" :key="player.id"
                     class="font-normal" :class="{'text-red-500': player.timeLeft <= 30}"
                 >
-                    {{ player.name }} {{ player.timeLeft }}
+                    {{ player.name }} {{ formatTime(player.timeLeft) }}
                 </div>
             </div>
         </button>
@@ -167,6 +167,9 @@ export default {
 
             // iniciamos el intervalo de ese jugador
             this.initInterval();
+        },
+        formatTime: function (s){
+            return (s-(s%=60))/60+(9<s?':':':0')+s;
         }
     },
     computed: {
