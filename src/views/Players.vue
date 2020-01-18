@@ -50,7 +50,8 @@ export default {
                 this.players.push({
                     id: this.players.length + 1,
                     name: this.player.name,
-                    timeLeft: null
+                    timeLeft: null,
+                    score: 0
                 });
                 this.player.name = '';
                 this.$nextTick(() => this.$refs.player.focus());

@@ -51,6 +51,10 @@ export default new Vuex.Store({
             state.players.map(player => {
                 player.timeLeft = null
             });
+        },
+        set_player_score (state, data) {
+            let player = state.players.find(player => player.id == data.playerId);
+            player.score = player.score + parseInt(data.score);
         }
     },
     getters: {
@@ -79,6 +83,11 @@ export default new Vuex.Store({
         },
         allPlayers: (state) => {
             return state.players;
+        },
+        playerLowerScore: (state) => {
+            return state.players.reduce(function(prev, curr) {
+                return prev.score < curr.score ? prev : curr;
+            });
         }
     },
     actions: {
@@ -91,8 +100,15 @@ export default new Vuex.Store({
             };
 
             for (const [key, value] of Object.entries(data.results)) {
-                var player = getters.playerById(key).name;
-                result.players.push({ player, value });
+                var player = getters.playerById(key);
+                var playerName = player.name;
+
+                result.players.push({ name: playerName, value });
+
+                commit('set_player_score', {
+                    playerId: player.id,
+                    score: value
+                });
             }
 
             commit('save_result', result);
