@@ -5,11 +5,12 @@
         <div class="mb-5 bg-gray-900 p-2 rounded shadow-lg">
             <div class="text-4xl text-green-500 font-semibold">Ganador</div>
             <div class="text-2xl font-bold mb-5">
-                {{ winner.name.toUpperCase() }} con {{ winner.score }} puntos
+                <div>{{ winner.name.toUpperCase() }} con {{ winner.score }} puntos.</div>
+                <div>Juegos ganados {{winner.gamesWon }} de {{ $store.state.games.length }}</div>
             </div>
 
             <div class="text-xl text-yellow-500" v-for="(player, index) in $store.getters.otherPlayers(winner.id)" :key="index">
-                {{ player.name }}: {{ player.score }} puntos
+                <span class="font-semibold">{{ index + 2 }}. {{ player.name.toUpperCase() }}:</span> {{ player.score }} puntos
             </div>
         </div>
 

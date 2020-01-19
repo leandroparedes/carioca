@@ -54,7 +54,11 @@ export default new Vuex.Store({
         },
         set_player_score (state, data) {
             let player = state.players.find(player => player.id == data.playerId);
-            player.score = player.score + parseInt(data.score);
+            let score = parseInt(data.score);
+            player.score = player.score + score;
+            if (score <= 0) {
+                player.gamesWon = player.gamesWon + 1;
+            }
         }
     },
     getters: {

@@ -51,7 +51,8 @@ export default {
                     id: this.players.length + 1,
                     name: this.player.name,
                     timeLeft: null,
-                    score: 0
+                    score: 0,
+                    gamesWon: 0
                 });
                 this.player.name = '';
                 this.$nextTick(() => this.$refs.player.focus());
