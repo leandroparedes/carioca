@@ -1,6 +1,6 @@
 <template>
     <div class="px-2 text-center">
-        <h1 class="text-center text-6xl font-semibold mb-3">Resultados</h1>
+        <h1 class="text-6xl font-semibold mb-3">Resultados</h1>
 
         <div class="mb-5 bg-gray-900 p-2 rounded shadow-lg">
             <div class="text-4xl text-green-500 font-semibold">Ganador</div>
