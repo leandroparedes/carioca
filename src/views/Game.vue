@@ -43,7 +43,9 @@
                     v-for="player in $store.getters.otherPlayers(currentPlayer.id)" :key="player.id"
                     class="font-normal" :class="{'text-red-500': player.timeLeft <= 30}"
                 >
-                    {{ player.name }} {{ formatTime(player.timeLeft) }}
+                    {{ player.name }} {{ formatTime(player.timeLeft) }}<span v-if="player.timeLeft == 260">
+                        <img src="../assets/weed.svg" alt="Blaze it" class="inline w-8 h-8 mb-2 ml-2">
+                    </span>
                 </div>
             </div>
         </button>
