@@ -3,14 +3,16 @@
         <h1 class="text-6xl font-semibold mb-3">Resultados</h1>
 
         <div class="mb-5 bg-gray-900 p-2 rounded shadow-lg">
-            <div class="text-4xl text-green-500 font-semibold">Ganador</div>
-            <div class="text-2xl font-bold mb-5">
-                <div>{{ winner.name.toUpperCase() }} con {{ winner.score }} puntos.</div>
-                <div>Juegos ganados {{winner.gamesWon }} de {{ $store.state.games.length }}</div>
+            <div class="font-semibold mb-8">
+                <div class="text-5xl text-green-500">1. {{ winner.name.toUpperCase() }}</div>
+                <div class="text-4xl">{{ winner.score }} puntos</div>
+                <div class="text-2xl">{{ winner.gamesWon }}/{{ $store.state.games.length }} juegos ganados</div>
             </div>
 
-            <div class="text-xl text-yellow-500" v-for="(player, index) in $store.getters.otherPlayers(winner.id)" :key="index">
-                <span class="font-semibold">{{ index + 2 }}. {{ player.name.toUpperCase() }}:</span> {{ player.score }} puntos
+            <div class="font-semibold mb-5" v-for="(player, index) in $store.getters.otherPlayers(winner.id)" :key="index">
+                <div class="text-3xl text-yellow-500">{{ index + 2 }}. {{ player.name.toUpperCase() }}</div>
+                <div class="text-2xl">{{ player.score }} puntos</div>
+                <div class="text-lg">{{ player.gamesWon }}/{{ $store.state.games.length }} juegos ganados</div>
             </div>
         </div>
 
