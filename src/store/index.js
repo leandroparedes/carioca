@@ -66,6 +66,10 @@ export default new Vuex.Store({
         },
         clear_next_player (state) {
             state.nextPlayer = null;
+        },
+        set_timer_for_player (state, data) {
+            let player = state.players.find(player => player.id == data.playerId);
+            player.timeLeft = data.time;
         }
     },
     actions: {
@@ -81,7 +85,10 @@ export default new Vuex.Store({
         },
         set_timers ({ commit, state }, gameTime) {
             state.players.forEach(player => {
-                player.timeLeft = player.timeLeft || gameTime * 60
+                commit('set_timer_for_player', {
+                    playerId: player.id,
+                    time: player.timeLeft || gameTime * 60
+                });
             });
         }
     },
