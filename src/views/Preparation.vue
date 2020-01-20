@@ -50,11 +50,12 @@ export default {
     },
     data: function () {
         return {
-            timeHasStarted: false
+            timeHasStarted: false,
+            currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
+            currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId),
         };
     },
     components: { Timer },
-    computed: mapState(['currentGame', 'currentPlayer']),
     methods: {
         timeout: function () {
             this.$router.push(`/game/${this.currentGame.id}`);

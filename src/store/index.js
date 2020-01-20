@@ -14,8 +14,8 @@ export default new Vuex.Store({
         },
         players: [],
         games: [],
-        currentGame: null,
-        currentPlayer: null
+        currentGameId: null,
+        currentPlayerId: null
     },
     mutations: {
         reset (state) {
@@ -26,8 +26,8 @@ export default new Vuex.Store({
             state.players = [];
             state.games = [];
 
-            state.currentGame = null;
-            state.currentPlayer = null;
+            state.currentGameId = null;
+            state.currentPlayerId = null;
         },
         game_init (state) {
             state.globalStatus.gameInit = true;
@@ -45,10 +45,10 @@ export default new Vuex.Store({
             state.globalStatus.gamesSetupCompleted = true;
         },
         set_current_game (state, gameId) {
-            state.currentGame = state.games.find(game => game.id == gameId);
+            state.currentGameId = state.games.find(game => game.id == gameId).id;
         },
         set_current_player (state, playerId) {
-            state.currentPlayer = state.players.find(player => player.id == playerId);
+            state.currentPlayerId = state.players.find(player => player.id == playerId).id;
         },
         set_timer_for_player (state, data) {
             let player = state.players.find(player => player.id == data.playerId);
@@ -74,6 +74,14 @@ export default new Vuex.Store({
                 });
             });
         }
+    },
+    getters: {
+        gameById: (state) => (id) => {
+            return state.games.find(game => game.id == id);
+        },
+        playerById: (state) => (id) => {
+            return state.players.find(player => player.id == id);
+        },
     },
     modules: {
     }
