@@ -7,8 +7,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     plugins: [createPersistedState()],
     state: {
+        globalStatus: {
+            gameInit: false,
+            playerSetupInit: false,
+        },
     },
     mutations: {
+        game_init (state) {
+            state.globalStatus.gameInit = true;
+        },
     },
     actions: {
     },
