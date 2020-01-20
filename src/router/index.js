@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SetupPlayers from '../views/setup/Players.vue';
 import SetupGames from '../views/setup/Games.vue';
+import Preparation from '../views/Preparation.vue';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
       path: '/setup/games',
       name: 'setup-games',
       component: SetupGames
+    },
+    {
+      path: '/preparation',
+      name: 'preparation',
+      component: Preparation
     }
 ];
 

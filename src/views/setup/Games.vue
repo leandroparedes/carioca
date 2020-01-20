@@ -46,6 +46,16 @@
 
 <script>
 export default {
+    beforeRouteEnter (to, from, next) {
+        const store = require('@/store').default;
+        const router = require('@/router').default;
+
+        if (store.state.globalStatus.gamesSetupCompleted) {
+            router.push('/preparation');
+        } else {
+            next();
+        }
+    },
     data: function () {
         return {
             name: '',
@@ -87,7 +97,9 @@ export default {
             this.$store.commit('set_next_game', 1);
             this.$store.commit('set_next_player', 1);
 
-            //this.$router.push('/prep');
+            this.$store.commit('game_init');
+
+            this.$router.push('/preparation');
         }
     }
 }

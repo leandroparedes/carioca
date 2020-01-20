@@ -12,19 +12,8 @@
 
 <script>
 export default {
-    beforeRouteEnter (to, from, next) {
-        const store = require('@/store').default;
-        const router = require('@/router').default;
-
-        if (store.state.globalStatus.gameInit) {
-            router.push('/setup/players');
-        } else {
-            next();
-        }
-    },
     methods: {
         play: function () {
-            this.$store.commit('game_init');
             this.$router.push('/setup/players');
         }
     }
