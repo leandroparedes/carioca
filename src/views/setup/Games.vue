@@ -1,0 +1,89 @@
+<template>
+    <div class="px-10 pb-10">
+        <h1 class="text-blue-500 text-4xl font-semibold text-center py-5">
+            Juegos <span v-if="games.length">({{games.length}})</span>
+        </h1>
+
+        <div class="flex justify-between text-gray-400 mb-5">
+            <div>Juego</div>
+            <div>Minutos</div>
+        </div>
+
+        <div
+            v-for="game in games" :key="game.id"
+            class="text-3xl font-semibold"
+        >
+            <div class="flex justify-between mb-3">
+                <div class="">{{ game.name }}</div>
+
+                <input
+                    type="number" min="1"
+                    :value="game.time"
+                    class="w-1/6 text-2xl px-2 py-1 text-gray-800 rounded text-center"
+                >
+            </div>
+        </div>
+
+        <div class="flex my-10">
+            <input type="text" class="mr-1 w-3/4 text-2xl text-gray-800 rounded px-2 py-1" v-model="name" placeholder="Ej: 2 Trios">
+
+            <input type="text" class="mx-1 w-1/4 text-2xl text-gray-800 rounded px-2 py-1" v-model="shortname" placeholder="2T">
+
+            <button class="ml-1 bg-blue-500 text-white font-semibold p-2 rounded" @click="add">Add</button>
+        </div>
+
+        <div class="text-center">
+            <button
+                class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
+                @click="next"
+                :disabled="loading"
+            >
+                {{ loading ? 'Guardando' : 'Continuar' }}
+            </button>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data: function () {
+        return {
+            name: '',
+            shortname: '',
+            games: [
+                { id: 1, name: '2 Trios', shortname: '2T', time: 5 },
+                { id: 2, name: '1 Trio 1 Escala', shortname: '1T 1E', time: 5 },
+                { id: 3, name: '2 Escalas', shortname: '2E', time: 5 },
+                { id: 4, name: '3 Trios', shortname: '3T', time: 5 },
+                { id: 5, name: '2 Trios 1 Escala', shortname: '2T 1E', time: 5 },
+                { id: 6, name: '2 Escalas 1 Trio', shortname: '2E 1T', time: 5 },
+                { id: 7, name: '4 Trios', shortname: '4T', time: 5 },
+                { id: 8, name: '3 Escalas', shortname: '3E', time: 5 },
+                { id: 9, name: 'Escala sucia', shortname: 'ES', time: 5 },
+                { id: 10, name: 'Escala real', shortname: 'ER', time: 5 },
+            ],
+            loading: false
+        }
+    },
+    methods: {
+        add: function () {
+            if (this.name.length && this.shortname.length) {
+                this.games.push({
+                    id: this.games.length + 1,
+                    name: this.name.charAt(0).toUpperCase() + this.name.slice(1),
+                    shortname: this.shortname.toUpperCase(),
+                    time: 5
+                });
+            }
+        },
+        next: function () {
+            this.loading = true;
+            this.$store.dispatch('set_games', this.games);
+            this.$store.commit('games_setup_complete');
+
+            //setear current game = 1
+            // setear current player = 1
+        }
+    }
+}
+</script>

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SetupPlayers from '../views/setup/Players.vue';
+import SetupGames from '../views/setup/Games.vue';
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
       path: '/setup/players',
       name: 'setup-players',
       component: SetupPlayers
+    },
+    {
+      path: '/setup/games',
+      name: 'setup-games',
+      component: SetupGames
     }
 ];
 
