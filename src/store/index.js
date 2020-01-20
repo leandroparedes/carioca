@@ -25,6 +25,9 @@ export default new Vuex.Store({
 
             state.players = [];
             state.games = [];
+
+            state.nextGame = null;
+            state.nextPlayer = null;
         },
         game_init (state) {
             state.globalStatus.gameInit = true;
