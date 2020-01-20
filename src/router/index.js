@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import SetupPlayers from '../views/setup/Players.vue';
 
 Vue.use(VueRouter);
 
@@ -10,6 +11,11 @@ const routes = [
       name: 'home',
       component: Home
     },
+    {
+      path: '/setup/players',
+      name: 'setup-players',
+      component: SetupPlayers
+    }
 ];
 
 const router = new VueRouter({
