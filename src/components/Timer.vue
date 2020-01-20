@@ -24,14 +24,24 @@ export default {
     watch: {
         init: function () {
             if (this.init) {
-                this.timerInterval = setInterval(() => {
-                    if (this.timerTime <= 0) {
-                        this.$emit('timeout');
-                        clearInterval(this.timerInterval);
-                    }
-                    this.timerTime--;
-                }, 1000);
+                this.initTime();
             }
+        }
+    },
+    created () {
+        if (this.init) {
+            this.initTime();
+        }
+    },
+    methods: {
+        initTime: function () {
+            this.timerInterval = setInterval(() => {
+                if (this.timerTime <= 0) {
+                    this.$emit('timeout');
+                    clearInterval(this.timerInterval);
+                }
+                this.timerTime--;
+            }, 1000);
         }
     },
     beforeDestroy() {
