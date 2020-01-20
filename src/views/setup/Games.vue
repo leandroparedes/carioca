@@ -84,8 +84,10 @@ export default {
             this.$store.dispatch('set_games', this.games);
             this.$store.commit('games_setup_complete');
 
-            //setear current game = 1
-            // setear current player = 1
+            this.$store.commit('set_next_game', 1);
+            this.$store.commit('set_next_player', 1);
+
+            //this.$router.push('/prep');
         }
     }
 }

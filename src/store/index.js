@@ -14,6 +14,8 @@ export default new Vuex.Store({
         },
         players: [],
         games: [],
+        nextGame: null,
+        nextPlayer: null
     },
     mutations: {
         reset (state) {
@@ -38,6 +40,12 @@ export default new Vuex.Store({
         },
         games_setup_complete (state) {
             state.globalStatus.gamesSetupCompleted = true;
+        },
+        set_next_game (state, gameId) {
+            state.nextGame = state.games.find(game => game.id == gameId);
+        },
+        set_next_player (state, playerId) {
+            state.nextPlayer = state.players.find(player => player.id == playerId);
         }
     },
     actions: {
