@@ -33,12 +33,12 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        set_players ({commit}, players) {
+        set_players ({ commit }, players) {
             players.forEach(player => {
                 commit('set_player', player);
             });
         },
-        set_games ({commit}, games) {
+        set_games ({ commit }, games) {
             games.forEach(game => {
                 commit('set_game', game);
             });
