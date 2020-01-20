@@ -14,8 +14,6 @@ export default new Vuex.Store({
         },
         players: [],
         games: [],
-        nextGame: null,
-        nextPlayer: null,
         currentGame: null,
         currentPlayer: null
     },
@@ -27,9 +25,6 @@ export default new Vuex.Store({
 
             state.players = [];
             state.games = [];
-
-            state.nextGame = null;
-            state.nextPlayer = null;
 
             state.currentGame = null;
             state.currentPlayer = null;
@@ -49,23 +44,11 @@ export default new Vuex.Store({
         games_setup_complete (state) {
             state.globalStatus.gamesSetupCompleted = true;
         },
-        set_next_game (state, gameId) {
-            state.nextGame = gameId ? state.games.find(game => game.id == gameId) : null;
-        },
-        set_next_player (state, playerId) {
-            state.nextPlayer = state.players.find(player => player.id == playerId);
-        },
         set_current_game (state, gameId) {
             state.currentGame = state.games.find(game => game.id == gameId);
         },
         set_current_player (state, playerId) {
             state.currentPlayer = state.players.find(player => player.id == playerId);
-        },
-        clear_next_game (state) {
-            state.nextGame = null;
-        },
-        clear_next_player (state) {
-            state.nextPlayer = null;
         },
         set_timer_for_player (state, data) {
             let player = state.players.find(player => player.id == data.playerId);

@@ -6,12 +6,12 @@
 
         <div class="mb-3">
             <div class="text-gray-400 text-lg">Próximo juego</div>
-            <div class="text-3xl font-bold">{{ nextGame.name }}</div>
+            <div class="text-3xl font-bold">{{ currentGame.name }}</div>
         </div>
 
         <div>
             <div class="text-gray-400 text-lg">Juega</div>
-            <div class="text-3xl font-bold text-green-400">{{ nextPlayer.name.toUpperCase() }}</div>
+            <div class="text-3xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
         </div>
 
         <timer :time="120" :init="timeHasStarted" @timeout="timeout" class="mt-5 mb-10"/>
@@ -26,9 +26,9 @@
         <button
             v-else
             class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
-            @click="$router.push(`/game/${nextGame.id}`)"
+            @click="$router.push(`/game/${currentGame.id}`)"
         >
-            Jugar {{ nextGame.name }}
+            Jugar {{ currentGame.name }}
         </button>
     </div>
 </template>
@@ -54,10 +54,10 @@ export default {
         };
     },
     components: { Timer },
-    computed: mapState(['nextGame', 'nextPlayer']),
+    computed: mapState(['currentGame', 'currentPlayer']),
     methods: {
         timeout: function () {
-            this.$router.push(`/game/${this.nextGame.id}`);
+            this.$router.push(`/game/${this.currentGame.id}`);
         }
     }
 }

@@ -94,8 +94,8 @@ export default {
             this.$store.dispatch('set_games', this.games);
             this.$store.commit('games_setup_complete');
 
-            this.$store.commit('set_next_game', 1);
-            this.$store.commit('set_next_player', 1);
+            this.$store.commit('set_current_game', 1);
+            this.$store.commit('set_current_player', 1);
 
             this.$store.commit('game_init');
 
