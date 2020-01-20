@@ -41,6 +41,7 @@ export default {
                     clearInterval(this.timerInterval);
                 }
                 this.timerTime--;
+                this.$emit('timeUpdated', this.timerTime);
             }, 1000);
         }
     },
