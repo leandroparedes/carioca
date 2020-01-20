@@ -16,6 +16,14 @@ export default new Vuex.Store({
         games: [],
     },
     mutations: {
+        reset (state) {
+            state.globalStatus.gameInit = false;
+            state.globalStatus.playersSetupCompleted = false;
+            state.globalStatus.gamesSetupCompleted = false;
+
+            state.players = [];
+            state.games = [];
+        },
         game_init (state) {
             state.globalStatus.gameInit = true;
         },
