@@ -14,7 +14,7 @@
             class="text-3xl font-semibold"
         >
             <div class="flex justify-between mb-3">
-                <div class="">{{ game.name }}</div>
+                <div class="w-5/6">{{ game.name }}</div>
 
                 <input
                     type="number" min="1"
@@ -74,6 +74,9 @@ export default {
                     shortname: this.shortname.toUpperCase(),
                     time: 5
                 });
+                
+                this.name = '';
+                this.shortname = '';
             }
         },
         next: function () {
