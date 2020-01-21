@@ -11,7 +11,15 @@
                     <div class="text-5xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
                 </div>
 
-                <timer :time="currentPlayer.timeLeft" :init="true" @timeUpdated="setUpdatedTime"/>
+                <timer
+                    v-if="this.currentTime >= 0"
+                    :time="currentPlayer.timeLeft"
+                    :init="true"
+                    @timeUpdated="setUpdatedTime"
+                />
+                <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
+                    Perdiste
+                </div>
             </div>
         </button>
     </div>
@@ -62,10 +70,15 @@ export default {
                 time: this.currentTime
             });
         },
+        rotatePlayers: function () {
+            this.$store.getters.nextPlayerAfter(this.currentPlayer.id);
+            //this.$store.commit('set_current_player', this.currentPlayer.id);
+        },
         endTurn: function () {
             this.saveTimeCurrentPlayer();
 
-            // change to next player
+            // rotacion de jugadores
+            this.rotatePlayers();
         }
     }
 }
