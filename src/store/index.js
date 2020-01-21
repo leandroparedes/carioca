@@ -11,6 +11,7 @@ export default new Vuex.Store({
             gameInit: false,
             playersSetupCompleted: false,
             gamesSetupCompleted: false,
+            gameOver: false
         },
         players: [],
         games: [],
@@ -24,6 +25,7 @@ export default new Vuex.Store({
             state.globalStatus.gameInit = false;
             state.globalStatus.playersSetupCompleted = false;
             state.globalStatus.gamesSetupCompleted = false;
+            state.globalStatus.gameOver = false;
 
             state.players = [];
             state.games = [];
@@ -37,6 +39,9 @@ export default new Vuex.Store({
         },
         game_init (state) {
             state.globalStatus.gameInit = true;
+        },
+        game_over (state) {
+            state.globalStatus.gameOver = true;
         },
         set_player (state, player) {
             state.players.push(player);

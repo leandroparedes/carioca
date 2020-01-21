@@ -88,6 +88,7 @@ export default {
                 this.$router.push(`/game/${nextGame.id}`);
             } else {
                 this.$router.push('/results');
+                this.$store.commit('game_over');
             }
         }
     }

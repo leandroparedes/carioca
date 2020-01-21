@@ -48,4 +48,15 @@ const router = new VueRouter({
     routes
 });
 
+router.beforeEach((to, from, next) => {
+    const store = require('@/store').default;
+    const router = require('@/router').default;
+
+    if (store.state.globalStatus.gameOver && to.path != '/results') {
+        router.push('/results');
+    } else {
+        next();
+    }
+});
+
 export default router;
