@@ -1,33 +1,39 @@
 <template>
-    <div>
-        <button @click="endTurn" class="min-h-screen min-w-full focus:outline-none">
-            <div class="-mt-64">
-                <h1 class="text-blue-500 text-4xl font-semibold py-5">
-                    {{ currentGame.name }}
-                </h1>
+    <button @click="finishTurn" class="min-w-full focus:outline-none">
+        <div class="min-h-screen">
+            <h1 class="text-blue-500 text-4xl font-semibold py-5">
+                {{ currentGame.name }}
+            </h1>
 
-                <div>
-                    <div class="text-gray-400 text-xl">Jugando</div>
-                    <div class="text-5xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
-                </div>
+            <div>
+                <div class="text-gray-400 text-xl">Jugando</div>
+                <div class="text-5xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
+            </div>
 
-                <timer
-                    v-if="this.currentTime >= 0"
-                    :time="currentPlayer.timeLeft"
-                    :init="true"
-                    @timeUpdated="setUpdatedTime"
-                />
-                <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
-                    Perdiste
+            <countdown-timer
+                v-if="currentPlayer.timeLeft > 0"
+                :time="currentPlayer.timeLeft"
+                autoinit
+                @updatedTime="handleUpdatedTime"
+            />
+            <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
+                Perdiste
+            </div>
+
+            <div class="mt-10">
+                <div
+                    v-for="player in playersWithoutCurrent" :key="player.id"
+                    class="text-xl font-semibold mb-1"
+                >
+                    {{ player.name }}: {{ player.timeLeft | formatTime }}
                 </div>
             </div>
-        </button>
-    </div>
+        </div>
+    </button>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import Timer from '@/components/Timer.vue';
+import CountdownTimer from '@/components/CountdownTimer.vue';
 
 export default {
     beforeRouteEnter (to, from, next) {
@@ -40,45 +46,34 @@ export default {
             next();
         }
     },
-    components: { Timer },
+    components: { CountdownTimer },
     data: function () {
         return {
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
-            currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId),
-            currentTime: 0
+            currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId)
         };
     },
     created () {
         this.$store.dispatch('set_timers', this.currentGame.time);
     },
-    mounted () {
-        window.addEventListener('beforeunload', this.leaving);
-    },
-    beforeDestroy () {
-        window.removeEventListener('beforeunload', this.leaving);
-    },
     methods: {
-        leaving: function () {
-            this.saveTimeCurrentPlayer();
+        handleUpdatedTime: function (newTime) {
+            this.$set(this.currentPlayer, 'timeLeft', newTime);
         },
-        setUpdatedTime: function (updatedTime) {
-            this.currentTime = updatedTime;
-        },
-        saveTimeCurrentPlayer: function () {
+        finishTurn: function () {
             this.$store.commit('set_timer_for_player', {
                 playerId: this.currentPlayer.id,
-                time: this.currentTime
+                time: this.currentPlayer.timeLeft
             });
-        },
-        rotatePlayers: function () {
-            this.$store.getters.nextPlayerAfter(this.currentPlayer.id);
-            //this.$store.commit('set_current_player', this.currentPlayer.id);
-        },
-        endTurn: function () {
-            this.saveTimeCurrentPlayer();
 
-            // rotacion de jugadores
-            this.rotatePlayers();
+            this.currentPlayer = this.$store.getters.nextPlayerAfter(this.currentPlayer.id);
+
+            this.$store.commit('set_current_player', this.currentPlayer.id);
+        }
+    },
+    computed: {
+        playersWithoutCurrent: function () {
+            return this.$store.state.players.filter(player => player.id != this.currentPlayer.id);
         }
     }
 }
