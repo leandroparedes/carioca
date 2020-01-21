@@ -1,58 +1,59 @@
 <template>
     <div>
-        <div class="flex justify-between">
+        <div class="flex justify-between" v-if="!gameover">
             <div>
                 <button v-if="!paused" @click="paused = true">Pausar</button>
                 <button v-else @click="paused = false">Reanudar</button>
             </div>
 
-            <div>Terminar</div>
+            <button @click="finishGame">Terminar</button>
         </div>
+
         <button
             @click="finishTurn"
             :class="{ 'opacity-25': paused }"
             class="min-w-full focus:outline-none"
             :disabled="paused"
         >
-        <div class="min-h-screen">
-            <h1 class="text-blue-500 text-4xl font-semibold py-5">
-                {{ currentGame.name }}
-            </h1>
+            <div class="min-h-screen">
+                <h1 class="text-blue-500 text-4xl font-semibold py-5">
+                    {{ currentGame.name }}
+                </h1>
 
-            <div v-if="!gameover">
-                <div>
-                    <div class="text-gray-400 text-xl">Jugando</div>
-                    <div class="text-6xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
-                </div>
+                <div v-if="!gameover">
+                    <div>
+                        <div class="text-gray-400 text-xl">Jugando</div>
+                        <div class="text-6xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
+                    </div>
 
-                <countdown-timer
-                    v-if="currentPlayer.timeLeft > 0"
-                    :time="currentPlayer.timeLeft"
-                    autoinit
+                    <countdown-timer
+                        v-if="currentPlayer.timeLeft > 0"
+                        :time="currentPlayer.timeLeft"
+                        autoinit
                         :paused="paused"
-                    @updatedTime="handleUpdatedTime"
-                    @timeout="handleTimeout"
-                    class="font-bold text-7xl"
-                />
-                <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
-                    Perdiste
+                        @updatedTime="handleUpdatedTime"
+                        @timeout="handleTimeout"
+                        class="font-bold text-7xl"
+                    />
+                    <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
+                        Perdiste
+                    </div>
                 </div>
-            </div>
-            <div v-else>
-                <div class="text-2xl font-semibold">Ganador</div>
-                <div class="text-6xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
-            </div>
+                <div v-else>
+                    <div class="text-2xl font-semibold">Ganador</div>
+                    <div class="text-6xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
+                </div>
 
-            <div class="mt-10">
-                <div
-                    v-for="player in playersWithoutCurrent" :key="player.id"
-                    class="text-xl font-semibold mb-1"
-                >
-                    {{ player.name }}: {{ player.timeLeft | formatTime }}
+                <div class="mt-10">
+                    <div
+                        v-for="player in playersWithoutCurrent" :key="player.id"
+                        class="text-xl font-semibold mb-1"
+                    >
+                        {{ player.name }}: {{ player.timeLeft | formatTime }}
+                    </div>
                 </div>
             </div>
-        </div>
-    </button>
+        </button>
     </div>
 </template>
 
@@ -97,6 +98,11 @@ export default {
             this.checkWinner(1500);
         },
         finishTurn: function () {
+            if (this.$store.getters.playersLeftCount == 1) {
+                this.finishGame();
+                return;
+            }
+
             this.savePlayerCurrentTime();
 
             this.currentPlayer = this.$store.getters.nextPlayerAfter(this.currentPlayer.id);
@@ -122,6 +128,9 @@ export default {
                     this.$store.commit('set_current_player', this.currentPlayer.id);
                 }, timeout);
             }
+        },
+        finishGame: function () {
+            this.$router.push(`/game/${this.currentGame.id}/results`);
         }
     },
     computed: {
