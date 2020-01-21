@@ -20,6 +20,7 @@
                 :autoinit="autoinit"
                 @timeout="handleTimeout"
                 @updatedTime="handleUpdatedTime"
+                class="text-6xl font-bold"
             />
         </div>
 

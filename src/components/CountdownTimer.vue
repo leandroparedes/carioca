@@ -1,5 +1,5 @@
 <template>
-    <div class="text-6xl font-bold" :class="statusColor">
+    <div :class="statusColor">
         {{ initialTime | formatTime }}
     </div>
 </template>

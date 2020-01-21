@@ -8,7 +8,7 @@
             <div v-if="!gameover">
                 <div>
                     <div class="text-gray-400 text-xl">Jugando</div>
-                    <div class="text-5xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
+                    <div class="text-6xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
                 </div>
 
                 <countdown-timer
@@ -17,6 +17,7 @@
                     autoinit
                     @updatedTime="handleUpdatedTime"
                     @timeout="handleTimeout"
+                    class="font-bold text-7xl"
                 />
                 <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
                     Perdiste
