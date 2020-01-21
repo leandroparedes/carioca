@@ -1,5 +1,19 @@
 <template>
-    <button @click="finishTurn" class="min-w-full focus:outline-none">
+    <div>
+        <div class="flex justify-between">
+            <div>
+                <button v-if="!paused" @click="paused = true">Pausar</button>
+                <button v-else @click="paused = false">Reanudar</button>
+            </div>
+
+            <div>Terminar</div>
+        </div>
+        <button
+            @click="finishTurn"
+            :class="{ 'opacity-25': paused }"
+            class="min-w-full focus:outline-none"
+            :disabled="paused"
+        >
         <div class="min-h-screen">
             <h1 class="text-blue-500 text-4xl font-semibold py-5">
                 {{ currentGame.name }}
@@ -15,6 +29,7 @@
                     v-if="currentPlayer.timeLeft > 0"
                     :time="currentPlayer.timeLeft"
                     autoinit
+                        :paused="paused"
                     @updatedTime="handleUpdatedTime"
                     @timeout="handleTimeout"
                     class="font-bold text-7xl"
@@ -38,6 +53,7 @@
             </div>
         </div>
     </button>
+    </div>
 </template>
 
 <script>
@@ -59,7 +75,8 @@ export default {
         return {
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
             currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId),
-            gameover: false
+            gameover: false,
+            paused: false
         };
     },
     created () {

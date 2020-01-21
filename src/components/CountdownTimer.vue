@@ -10,6 +10,7 @@ export default {
     props: {
         time: { type: Number, required: true },
         autoinit: { type: Boolean, default: false },
+        paused: { type: Boolean, default: false },
         warningTime: { type: Number, default: 60 },
         dangerTime: { type: Number, default: 30 },
         intervals: { type: Number, default: 1 }
@@ -35,6 +36,13 @@ export default {
         },
         time: function (newValue, oldValue) {
             this.initialTime = newValue;
+        },
+        paused: function () {
+            if (this.paused) {
+                clearInterval(this.timerInterval);
+            } else {
+                this.initInterval();
+            }
         }
     },
     methods: {
