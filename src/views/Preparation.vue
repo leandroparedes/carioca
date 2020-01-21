@@ -6,20 +6,27 @@
 
         <div class="mb-3">
             <div class="text-gray-400 text-lg">Próximo juego</div>
-            <div class="text-3xl font-bold">{{ currentGame.name }}</div>
+            <div class="text-4xl font-bold">{{ currentGame.name }}</div>
         </div>
 
         <div>
             <div class="text-gray-400 text-lg">Juega</div>
-            <div class="text-3xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
+            <div class="text-4xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
         </div>
 
-        <timer :time="120" :init="timeHasStarted" @timeout="timeout" class="mt-5 mb-10"/>
+        <div class="mt-5 mb-10">
+            <countdown-timer
+                :time="initialTime"
+                :autoinit="autoinit"
+                @timeout="handleTimeout"
+                @updatedTime="handleUpdatedTime"
+            />
+        </div>
 
         <button
-            v-if="!timeHasStarted"
+            v-if="!autoinit"
             class="bg-blue-500 text-white text-2xl font-bold px-3 py-1 rounded"
-            @click="timeHasStarted = true"
+            @click="autoinit = true"
         >
             Iniciar tiempo
         </button>
@@ -28,14 +35,14 @@
             class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
             @click="$router.push(`/game/${currentGame.id}`)"
         >
-            Jugar {{ currentGame.name }}
+            Continuar al juego
         </button>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import Timer from '@/components/Timer.vue';
+import CountdownTimer from '@/components/CountdownTimer.vue';
 
 export default {
     beforeRouteEnter (to, from, next) {
@@ -50,14 +57,18 @@ export default {
     },
     data: function () {
         return {
-            timeHasStarted: false,
+            initialTime: 120,
+            autoinit: false,
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
             currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId),
         };
     },
-    components: { Timer },
+    components: { CountdownTimer },
     methods: {
-        timeout: function () {
+        handleUpdatedTime: function (newTime) {
+            this.initialTime = newTime;
+        },
+        handleTimeout: function () {
             this.$router.push(`/game/${this.currentGame.id}`);
         }
     }
