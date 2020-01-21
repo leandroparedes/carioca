@@ -6,6 +6,7 @@ import SetupGames from '../views/setup/Games.vue';
 import Preparation from '../views/Preparation.vue';
 import Game from '../views/Game.vue';
 import GameResult from '../views/GameResult.vue';
+import Results from '../views/Results.vue';
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
       path: '/game/:id/results',
       name: 'game-result',
       component: GameResult
+    },
+    {
+      path: '/results',
+      name: 'results',
+      component: Results
     }
 ];
 
