@@ -18,6 +18,7 @@
             <countdown-timer
                 :time="initialTime"
                 :autoinit="autoinit"
+                :paused="paused"
                 @timeout="handleTimeout"
                 @updatedTime="handleUpdatedTime"
                 class="text-6xl font-bold"
@@ -31,13 +32,21 @@
         >
             Iniciar tiempo
         </button>
-        <button
-            v-else
-            class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
-            @click="$router.push(`/game/${currentGame.id}`)"
-        >
-            Continuar al juego
-        </button>
+        <div v-else class="flex flex-col">
+            <button
+                class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
+                @click="$router.push(`/game/${currentGame.id}`)"
+            >
+                Continuar al juego
+            </button>
+
+            <button
+                @click="togglePause"
+                class="text-blue-500 text-4xl font-semibold mt-10 focus:outline-none"
+            >
+                {{ paused ? 'Reanudar' : 'Pausar' }}
+            </button>
+        </div>
     </div>
 </template>
 
@@ -62,6 +71,7 @@ export default {
             autoinit: false,
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
             currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId),
+            paused: false
         };
     },
     components: { CountdownTimer },
@@ -71,6 +81,9 @@ export default {
         },
         handleTimeout: function () {
             this.$router.push(`/game/${this.currentGame.id}`);
+        },
+        togglePause: function () {
+            this.paused = !this.paused;
         }
     }
 }
