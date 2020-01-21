@@ -15,6 +15,7 @@
                 :time="currentPlayer.timeLeft"
                 autoinit
                 @updatedTime="handleUpdatedTime"
+                @timeout="handleTimeout"
             />
             <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
                 Perdiste
@@ -63,6 +64,9 @@ export default {
     methods: {
         handleUpdatedTime: function (newTime) {
             this.$set(this.currentPlayer, 'timeLeft', newTime);
+        },
+        handleTimeout: function () {
+            this.savePlayerCurrentTime();
         },
         finishTurn: function () {
             this.savePlayerCurrentTime();

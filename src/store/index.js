@@ -70,7 +70,7 @@ export default new Vuex.Store({
             state.players.forEach(player => {
                 commit('set_timer_for_player', {
                     playerId: player.id,
-                    time: player.timeLeft || gameTime * 60
+                    time: player.timeLeft != null && player.timeLeft >= 0 ? player.timeLeft : gameTime * 60
                 });
             });
         }
@@ -92,6 +92,9 @@ export default new Vuex.Store({
             }
 
             return playersWithTimeLeft[index + 1];
+        },
+        playersLeftCount: (state) => {
+            return state.players.filter(player => player.timeLeft > 0).length;
         }
     },
     modules: {
