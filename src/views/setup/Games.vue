@@ -18,7 +18,7 @@
 
                 <input
                     type="number" min="1"
-                    :value="game.time"
+                    v-model="game.time"
                     class="w-1/6 text-2xl px-2 py-1 text-gray-800 rounded text-center"
                 >
             </div>
