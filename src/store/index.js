@@ -15,7 +15,8 @@ export default new Vuex.Store({
         players: [],
         games: [],
         currentGameId: null,
-        currentPlayerId: null
+        currentPlayerId: null,
+        results: []
     },
     mutations: {
         reset (state) {
@@ -28,6 +29,8 @@ export default new Vuex.Store({
 
             state.currentGameId = null;
             state.currentPlayerId = null;
+
+            state.results = [];
         },
         game_init (state) {
             state.globalStatus.gameInit = true;
