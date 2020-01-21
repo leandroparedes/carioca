@@ -5,20 +5,26 @@
                 {{ currentGame.name }}
             </h1>
 
-            <div>
-                <div class="text-gray-400 text-xl">Jugando</div>
-                <div class="text-5xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
-            </div>
+            <div v-if="!gameover">
+                <div>
+                    <div class="text-gray-400 text-xl">Jugando</div>
+                    <div class="text-5xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
+                </div>
 
-            <countdown-timer
-                v-if="currentPlayer.timeLeft > 0"
-                :time="currentPlayer.timeLeft"
-                autoinit
-                @updatedTime="handleUpdatedTime"
-                @timeout="handleTimeout"
-            />
-            <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
-                Perdiste
+                <countdown-timer
+                    v-if="currentPlayer.timeLeft > 0"
+                    :time="currentPlayer.timeLeft"
+                    autoinit
+                    @updatedTime="handleUpdatedTime"
+                    @timeout="handleTimeout"
+                />
+                <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
+                    Perdiste
+                </div>
+            </div>
+            <div v-else>
+                <div class="text-2xl font-semibold">Ganador</div>
+                <div class="text-6xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
             </div>
 
             <div class="mt-10">
@@ -51,12 +57,14 @@ export default {
     data: function () {
         return {
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
-            currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId)
+            currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId),
+            gameover: false
         };
     },
     created () {
         window.addEventListener('beforeunload', this.leaving);
         this.$store.dispatch('set_timers', this.currentGame.time);
+        this.checkWinner(0);
     },
     beforeDestroy () {
         window.removeEventListener('beforeunload', this.leaving);
@@ -67,6 +75,8 @@ export default {
         },
         handleTimeout: function () {
             this.savePlayerCurrentTime();
+
+            this.checkWinner(1500);
         },
         finishTurn: function () {
             this.savePlayerCurrentTime();
@@ -83,6 +93,17 @@ export default {
                 playerId: this.currentPlayer.id,
                 time: this.currentPlayer.timeLeft
             });
+        },
+        checkWinner: function (timeout) {
+            if (this.$store.getters.playersLeftCount == 1) {
+                setTimeout(() => {
+                    this.gameover = true;
+
+                    this.currentPlayer = this.$store.getters.winner;
+
+                    this.$store.commit('set_current_player', this.currentPlayer.id);
+                }, timeout);
+            }
         }
     },
     computed: {

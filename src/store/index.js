@@ -95,6 +95,9 @@ export default new Vuex.Store({
         },
         playersLeftCount: (state) => {
             return state.players.filter(player => player.timeLeft > 0).length;
+        },
+        winner: (state) => {
+            return state.players.filter(player => player.timeLeft > 0)[0];
         }
     },
     modules: {
