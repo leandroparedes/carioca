@@ -1,7 +1,7 @@
 <template>
     <div class="px-10 pb-10">
         <h1 class="text-blue-500 text-4xl font-semibold text-center py-5">
-            Juegos <span v-if="games.length">({{games.length}})</span>
+            Juegos <span v-if="games.length">({{ games.length }})</span>
         </h1>
 
         <div class="flex justify-between text-gray-400 mb-5">
@@ -9,27 +9,41 @@
             <div>Minutos</div>
         </div>
 
+       
         <div
             v-for="game in games" :key="game.id"
-            class="text-3xl font-semibold"
+            class="flex justify-between mb-3 text-2xl font-semibold"
         >
-            <div class="flex justify-between mb-3">
-                <div class="w-5/6">{{ game.name }}</div>
+            <div class="w-5/6">{{ game.name }}</div>
 
-                <input
-                    type="number" min="1"
-                    v-model="game.time"
-                    class="w-1/6 text-2xl px-2 py-1 text-gray-800 rounded text-center"
-                >
-            </div>
+            <input
+                type="number" min="1"
+                v-model="game.time"
+                class="w-1/6 px-2 py-1 text-gray-800 rounded text-center"
+            >
         </div>
 
         <div class="flex my-10">
-            <input type="text" class="mr-1 w-3/4 text-2xl text-gray-800 rounded px-2 py-1" v-model="name" placeholder="Ej: 2 Trios">
+            <input
+                type="text"
+                class="mr-1 w-3/4 text-2xl text-gray-800 rounded px-2 py-1"
+                v-model.trim="name"
+                placeholder="Ej: 2 Trios"
+            >
 
-            <input type="text" class="mx-1 w-1/4 text-2xl text-gray-800 rounded px-2 py-1" v-model="shortname" placeholder="2T">
+            <input
+                type="text"
+                class="mx-1 w-1/4 text-2xl text-gray-800 rounded px-2 py-1"
+                v-model.trim="shortname"
+                placeholder="2T"
+            >
 
-            <button class="ml-1 bg-blue-500 text-white font-semibold p-2 rounded" @click="add">Add</button>
+            <button
+                class="ml-1 bg-blue-500 text-white font-semibold p-2 rounded"
+                @click="add"
+            >
+                Add
+            </button>
         </div>
 
         <div class="text-center">

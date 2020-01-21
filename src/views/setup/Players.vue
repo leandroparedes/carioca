@@ -19,12 +19,27 @@
         </div>
 
         <div class="flex mt-10">
-            <input type="text" class="mr-1 w-full text-2xl text-gray-800 rounded px-2 py-1" ref="player" v-model="name" placeholder="Añade un nuevo jugador">
+            <input
+                type="text" 
+                ref="player"
+                class="mr-1 w-full text-2xl text-gray-800 rounded px-2 py-1"
+                v-model="name"
+                placeholder="Añade un nuevo jugador"
+            >
 
-            <button class="ml-1 bg-blue-500 text-white font-semibold p-2 rounded" @click="add">Add</button>
+            <button
+                class="ml-1 bg-blue-500 text-white font-semibold p-2 rounded"
+                @click="add"
+                v-if="name.length"
+            >
+                Add
+            </button>
         </div>
 
-        <div v-if="players.length >= 2" class="mt-10 text-center">
+        <div
+            v-if="players.length >= 2"
+            class="mt-10 text-center"
+        >
             <button
                 class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
                 @click="next"
