@@ -16,6 +16,7 @@ export default new Vuex.Store({
         games: [],
         currentGameId: null,
         currentPlayerId: null,
+        rotatingPlayerId: null,
         results: []
     },
     mutations: {
@@ -29,6 +30,8 @@ export default new Vuex.Store({
 
             state.currentGameId = null;
             state.currentPlayerId = null;
+
+            state.rotatingPlayerId = null;
 
             state.results = [];
         },
@@ -53,9 +56,15 @@ export default new Vuex.Store({
         set_current_player (state, playerId) {
             state.currentPlayerId = state.players.find(player => player.id == playerId).id;
         },
+        set_rotating_player (state, playerId) {
+            state.rotatingPlayerId = playerId;
+        },
         set_timer_for_player (state, data) {
             let player = state.players.find(player => player.id == data.playerId);
             player.timeLeft = data.time;
+        },
+        save_result (state, result) {
+            state.results.push(result);
         }
     },
     actions: {

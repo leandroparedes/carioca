@@ -111,6 +111,8 @@ export default {
             this.$store.commit('set_current_game', 1);
             this.$store.commit('set_current_player', 1);
 
+            this.$store.commit('set_rotating_player', 1);
+
             this.$store.commit('game_init');
 
             this.$router.push('/preparation');
