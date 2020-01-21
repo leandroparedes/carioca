@@ -16,8 +16,8 @@ export default {
     computed: {
         textColor: function () {
             return {
-                'text-yellow-500': this.timerTime <= 30 && this.timerTime > 15,
-                'text-red-500': this.timerTime <= 15
+                'text-yellow-500': this.timerTime <= 60 && this.timerTime > 30,
+                'text-red-500': this.timerTime <= 30
             };
         }
     },
