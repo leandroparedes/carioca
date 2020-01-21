@@ -83,12 +83,15 @@ export default new Vuex.Store({
             return state.players.find(player => player.id == id);
         },
         nextPlayerAfter: (state) => (playerId) => {
-            // 1. filtrar la lista para obtener solamente los jugadores que tienen tiempo
-            // restante
-            let playersWithTime = state.players.filter(player => player.timeLeft > 0);
+            let playersWithTimeLeft = state.players.filter(player => player.timeLeft > 0);
 
-            //let currentPlayerIndex = playersWithTime.indexOf()
-            console.log('next player after', playerId);
+            let index = playersWithTimeLeft.indexOf(state.players.find(player => player.id == playerId));
+
+            if (index == -1 || index >= playersWithTimeLeft.length - 1) {
+                index = -1;
+            }
+
+            return playersWithTimeLeft[index + 1];
         }
     },
     modules: {
