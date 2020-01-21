@@ -54,21 +54,31 @@ export default {
         };
     },
     created () {
+        window.addEventListener('beforeunload', this.leaving);
         this.$store.dispatch('set_timers', this.currentGame.time);
+    },
+    beforeDestroy () {
+        window.removeEventListener('beforeunload', this.leaving);
     },
     methods: {
         handleUpdatedTime: function (newTime) {
             this.$set(this.currentPlayer, 'timeLeft', newTime);
         },
         finishTurn: function () {
-            this.$store.commit('set_timer_for_player', {
-                playerId: this.currentPlayer.id,
-                time: this.currentPlayer.timeLeft
-            });
+            this.savePlayerCurrentTime();
 
             this.currentPlayer = this.$store.getters.nextPlayerAfter(this.currentPlayer.id);
 
             this.$store.commit('set_current_player', this.currentPlayer.id);
+        },
+        leaving: function () {
+            this.savePlayerCurrentTime();
+        },
+        savePlayerCurrentTime: function () {
+            this.$store.commit('set_timer_for_player', {
+                playerId: this.currentPlayer.id,
+                time: this.currentPlayer.timeLeft
+            });
         }
     },
     computed: {
