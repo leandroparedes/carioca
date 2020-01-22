@@ -42,27 +42,27 @@
                     <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
                         Perdiste
                     </div>
+
+                    <div class="mt-4">
+                        <div
+                            v-for="player in playersWithoutCurrent" :key="player.id"
+                            class="text-xl font-semibold mb-1"
+                            :class="textColor(player.timeLeft)"
+                        >
+                            {{ player.name }}: {{ player.timeLeft | formatTime }}
+                        </div>
+                    </div>
                 </div>
-                <div v-else class="text-green-500">
+                <div v-else class="text-green-500 mt-12">
                     <div class="text-6xl">
                         <font-awesome-icon icon="crown" />
                     </div>
                     <div class="text-6xl font-bold -mt-4">
                         {{ currentPlayer.name.toUpperCase() }}
                     </div>
-                </div>
 
-                <div class="mt-4">
-                    <div
-                        v-for="player in playersWithoutCurrent" :key="player.id"
-                        class="text-xl font-semibold mb-1"
-                        :class="textColor(player.timeLeft)"
-                    >
-                        {{ player.name }}: {{ player.timeLeft | formatTime }}
-                    </div>
+                    <div class="mt-10 text-4xl font-thin px-10 text-gray-500">Toque para continuar</div>
                 </div>
-
-                <div class="mt-10 text-4xl font-thin px-10 text-gray-500">Toque para continuar</div>
             </div>
         </button>
     </div>
