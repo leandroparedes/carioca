@@ -53,15 +53,17 @@ export default {
     },
     methods: {
         continueGame: function () {
-            this.saveResults();
-            this.setNextPlayer();
-            this.nextGameOrResults();
+            if (this.saveResults()) {
+                this.setNextPlayer();
+                this.nextGameOrResults();
+            }
         },
         saveResults: function () {
             this.loading = true;
 
             if (Object.entries(this.scores).length < this.$store.state.players.length) {
-                return;
+                this.loading = false;
+                return false;
             }
 
             this.$store.commit('save_result', {
@@ -70,6 +72,8 @@ export default {
             });
 
             this.$store.dispatch('clear_timers');
+
+            return true;
         },
         setNextPlayer: function () {
             const nextRotatingPlayer = this.$store.getters.playerById(this.$store.state.rotatingPlayerId + 1);
