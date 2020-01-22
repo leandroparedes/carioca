@@ -4,6 +4,11 @@
             Juegos <span v-if="games.length">({{ games.length }})</span>
         </h1>
 
+        <div class="mb-4 flex justify-center">
+            <button class="bg-green-500 text-white rounded px-2 py-1 font-semibold mr-2" @click="games.forEach(game => game.time++)"><font-awesome-icon icon="clock"/> +1</button>
+            <button class="bg-red-500 text-white rounded px-2 py-1 font-semibold ml-2" @click="games.forEach(game => game.time--)"><font-awesome-icon icon="clock"/> -1</button>
+        </div>
+
         <div class="flex justify-between text-gray-400 mb-5">
             <div>Juego</div>
             <div>Minutos</div>

@@ -5,10 +5,10 @@ import store from './store'
 
 // fontawesome setup
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPause, faPlay, faCheck, faPlus, faCrown, faCannabis,faSave, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faPause, faPlay, faCheck, faPlus, faCrown, faCannabis,faSave, faTrophy, faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faPause, faPlay, faCheck, faPlus, faCrown, faCannabis,faSave, faTrophy);
+library.add(faPause, faPlay, faCheck, faPlus, faCrown, faCannabis,faSave, faTrophy, faClock);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
