@@ -52,6 +52,7 @@
                     <div
                         v-for="player in playersWithoutCurrent" :key="player.id"
                         class="text-xl font-semibold mb-1"
+                        :class="textColor(player.timeLeft)"
                     >
                         {{ player.name }}: {{ player.timeLeft | formatTime }}
                     </div>
@@ -138,6 +139,13 @@ export default {
         },
         finishGame: function () {
             this.$router.push(`/game/${this.currentGame.id}/results`);
+        },
+        textColor: function (value) {
+            // estos valores deberian conncidir con los warningTime y darngerTime del countdown-timer
+            return {
+                'text-yellow-500': value <= 60 && value > 30,
+                'text-red-500': value <= 30,
+            };
         }
     },
     computed: {
