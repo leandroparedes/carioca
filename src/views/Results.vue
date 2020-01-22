@@ -60,9 +60,14 @@ export default {
             };
         }
     },
+    beforeDestroy () {
+        localStorage.removeItem('savegame');
+        window.location.href = "/";
+    },
     computed: {
         playersWithoutWinner: function () {
-            return this.$store.state.players.filter(player => player.id != this.winner.id);
+            let playersWithoutWinner = this.$store.state.players.filter(player => player.id != this.winner.id);
+            return playersWithoutWinner.sort((a, b) => a.score - b.score);
         }
     }
 }
