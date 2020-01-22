@@ -1,12 +1,19 @@
 <template>
     <div>
-        <div class="flex justify-between" v-if="!gameover">
-            <div>
-                <button v-if="!paused" @click="paused = true">Pausar</button>
-                <button v-else @click="paused = false">Reanudar</button>
-            </div>
+        <div class="flex justify-between p-2" v-if="!gameover">
+            <button
+                class="text-2xl focus:outline-none text-gray-500"
+                @click="togglePause"
+            >
+                    <font-awesome-icon :icon="paused ? 'play' : 'pause'"/>
+            </button>
 
-            <button @click="finishGame">Terminar</button>
+            <button
+                class="text-2xl focus:outline-none text-gray-500"
+                @click="finishGame"
+            >
+                <font-awesome-icon icon="check"/>
+            </button>
         </div>
 
         <button
@@ -16,7 +23,7 @@
             :disabled="paused"
         >
             <div class="min-h-screen">
-                <h1 class="text-blue-500 text-4xl font-semibold py-5">
+                <h1 class="text-blue-500 text-4xl font-semibold pb-5">
                     {{ currentGame.name }}
                 </h1>
 
@@ -96,6 +103,9 @@ export default {
             this.savePlayerCurrentTime();
 
             this.checkWinner(1500);
+        },
+        togglePause: function () {
+            this.paused = !this.paused;
         },
         finishTurn: function () {
             if (this.$store.getters.playersLeftCount == 1) {

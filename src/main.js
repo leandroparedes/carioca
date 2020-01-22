@@ -3,6 +3,16 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// fontawesome setup
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPause, faPlay, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faPause, faPlay, faCheck);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+// tailwind css file
 import '@/assets/css/main.css'
 
 Vue.config.productionTip = false
