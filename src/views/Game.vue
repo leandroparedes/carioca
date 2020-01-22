@@ -23,15 +23,12 @@
             :disabled="paused"
         >
             <div class="min-h-screen">
-                <h1 class="text-blue-500 text-4xl font-semibold pb-5">
+                <h1 class="text-blue-500 text-4xl font-semibold">
                     {{ currentGame.name }}
                 </h1>
 
                 <div v-if="!gameover">
-                    <div>
-                        <div class="text-gray-400 text-xl">Jugando</div>
-                        <div class="text-6xl font-bold text-green-400">{{ currentPlayer.name.toUpperCase() }}</div>
-                    </div>
+                    <div class="text-6xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
 
                     <countdown-timer
                         v-if="currentPlayer.timeLeft > 0"
@@ -51,7 +48,7 @@
                     <div class="text-6xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
                 </div>
 
-                <div class="mt-10">
+                <div class="mt-4">
                     <div
                         v-for="player in playersWithoutCurrent" :key="player.id"
                         class="text-xl font-semibold mb-1"
