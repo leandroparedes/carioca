@@ -14,15 +14,17 @@
             <div class="text-4xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
         </div>
 
-        <div class="mt-5 mb-10">
-            <countdown-timer
-                :time="initialTime"
-                :autoinit="autoinit"
-                :paused="paused"
-                @timeout="handleTimeout"
-                @updatedTime="handleUpdatedTime"
-                class="text-6xl font-bold"
-            />
+        <div class="mt-5 mb-5">
+            <button @click="togglePause" class="focus:outline-none">
+                <countdown-timer
+                    :time="initialTime"
+                    :autoinit="autoinit"
+                    :paused="paused"
+                    @timeout="handleTimeout"
+                    @updatedTime="handleUpdatedTime"
+                    class="text-6xl font-bold"
+                />
+            </button>
         </div>
 
         <button
@@ -32,21 +34,13 @@
         >
             Iniciar tiempo
         </button>
-        <div v-else class="flex flex-col">
-            <button
-                class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
-                @click="$router.push(`/game/${currentGame.id}`)"
-            >
-                Continuar al juego
-            </button>
-
-            <button
-                @click="togglePause"
-                class="text-blue-500 text-4xl font-semibold mt-10 focus:outline-none"
-            >
-                {{ paused ? 'Reanudar' : 'Pausar' }}
-            </button>
-        </div>
+        <button
+            v-else
+            class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
+            @click="$router.push(`/game/${currentGame.id}`)"
+        >
+            Continuar al juego
+        </button>
     </div>
 </template>
 
