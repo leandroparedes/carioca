@@ -8,7 +8,7 @@
                 <font-awesome-icon :icon="paused ? 'play' : 'pause'"/>
             </button>
 
-            <save-button v-if="!saving" class="focus:outline-none" @saved="handleSave"/>
+            <save-button v-if="!saving" class="focus:outline-none" @click.native="handleSave"/>
             <div v-else class="flex items-center font-semibold">Guardando...</div>
 
             <button
@@ -83,6 +83,7 @@
 <script>
 import CountdownTimer from '@/components/CountdownTimer.vue';
 import SaveButton from '@/components/SaveButton.vue';
+import shared from '@/shared';
 
 export default {
     beforeRouteEnter (to, from, next) {
@@ -112,7 +113,11 @@ export default {
     },
     created () {
         window.addEventListener('beforeunload', this.leaving);
+
         this.$store.dispatch('set_timers', this.currentGame.time);
+
+        shared.save();
+        
         this.checkWinner(0);
     },
     beforeDestroy () {

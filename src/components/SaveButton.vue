@@ -5,19 +5,16 @@
 </template>
 
 <script>
+import shared from '@/shared';
+
 export default {
     props: {
         mode: { type: String, default: 'save' }
     },
+    created () {
+        this.save = shared.save;
+    },
     methods: {
-        save: function () {
-            const state = Object.assign({}, this.$store.state);
-            const path = this.$router.currentRoute.path;
-
-            localStorage.savegame = JSON.stringify({ state, path });
-
-            this.$emit('saved');
-        },
         load: function () {
             const savegame = JSON.parse(localStorage.savegame);
 
