@@ -26,11 +26,10 @@
             :disabled="paused"
         >
             <div class="min-h-screen pt-1">
-                <h1 class="text-blue-500 text-4xl font-semibold">
-                    {{ currentGame.name }}
-                </h1>
-
                 <div v-if="!gameover">
+                    <h1 class="text-blue-500 text-4xl font-semibold">
+                        {{ currentGame.name }}
+                    </h1>
                     <div class="text-6xl font-bold -mb-4" :class="textColor(currentPlayer.timeLeft)">{{ currentPlayer.name.toUpperCase() }}</div>
 
                     <countdown-timer
@@ -61,12 +60,17 @@
                         </div>
                     </div>
                 </div>
-                <div v-else class="text-green-500 mt-12">
-                    <div class="text-6xl">
-                        <font-awesome-icon icon="crown" />
-                    </div>
-                    <div class="text-6xl font-bold -mt-4">
-                        {{ currentPlayer.name.toUpperCase() }}
+                <div v-else class="mt-8">
+                    <h1 class="text-blue-500 text-4xl font-semibold">
+                        {{ currentGame.name }}
+                    </h1>
+                    <div class="text-green-500 mt-8">
+                        <div class="text-6xl">
+                            <font-awesome-icon icon="crown" />
+                        </div>
+                        <div class="text-6xl font-bold -mt-4">
+                            {{ currentPlayer.name.toUpperCase() }}
+                        </div>
                     </div>
 
                     <div class="mt-10 text-4xl font-thin px-10 text-gray-500">Toque para continuar</div>
