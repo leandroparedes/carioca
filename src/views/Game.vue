@@ -128,6 +128,8 @@ export default {
             this.$set(this.currentPlayer, 'timeLeft', newTime);
         },
         handleTimeout: function () {
+            shared.save();
+
             this.savePlayerCurrentTime();
 
             this.checkWinner(1500);
@@ -143,8 +145,6 @@ export default {
             this.paused = !this.paused;
         },
         finishTurn: function () {
-            shared.save();
-
             if (this.$store.getters.playersLeftCount == 1) {
                 this.finishGame();
                 return;
@@ -155,6 +155,8 @@ export default {
             this.currentPlayer = this.$store.getters.nextPlayerAfter(this.currentPlayer.id);
 
             this.$store.commit('set_current_player', this.currentPlayer.id);
+
+            shared.save();
         },
         leaving: function () {
             this.savePlayerCurrentTime();
