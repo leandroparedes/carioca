@@ -5,7 +5,7 @@
                 class="text-2xl focus:outline-none text-gray-500"
                 @click="togglePause"
             >
-                    <font-awesome-icon :icon="paused ? 'play' : 'pause'"/>
+                <font-awesome-icon :icon="paused ? 'play' : 'pause'"/>
             </button>
 
             <button
