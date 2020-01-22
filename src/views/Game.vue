@@ -137,12 +137,14 @@ export default {
 
             setTimeout(() => {
                 this.saving = false;
-            }, 2000);
+            }, 1000);
         },
         togglePause: function () {
             this.paused = !this.paused;
         },
         finishTurn: function () {
+            shared.save();
+
             if (this.$store.getters.playersLeftCount == 1) {
                 this.finishGame();
                 return;
@@ -178,7 +180,6 @@ export default {
             this.$router.push(`/game/${this.currentGame.id}/results`);
         },
         textColor: function (value) {
-            // estos valores deberian conncidir con los warningTime y darngerTime del countdown-timer
             return {
                 'text-yellow-500': value <= this.warningTime && value > this.dangerTime,
                 'text-red-500': value <= this.dangerTime,
