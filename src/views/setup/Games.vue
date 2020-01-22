@@ -39,10 +39,10 @@
             >
 
             <button
-                class="ml-1 bg-blue-500 text-white font-semibold p-2 rounded"
+                class="w-1/6 ml-1 bg-blue-500 text-xl text-white font-bold rounded"
                 @click="add"
             >
-                Add
+                <font-awesome-icon icon="plus" />
             </button>
         </div>
 

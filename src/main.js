@@ -5,10 +5,10 @@ import store from './store'
 
 // fontawesome setup
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPause, faPlay, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPause, faPlay, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faPause, faPlay, faCheck);
+library.add(faPause, faPlay, faCheck, faPlus);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

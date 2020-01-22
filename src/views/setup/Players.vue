@@ -6,7 +6,7 @@
 
         <div
             v-if="!players.length"
-            class="text-2xl font-thin text-center text-gray-400 mt-5"
+            class="text-2xl font-thin text-center text-gray-400"
         >
             No hay jugadores registrados
         </div>
@@ -22,17 +22,16 @@
             <input
                 type="text" 
                 ref="player"
-                class="mr-1 w-full text-2xl text-gray-800 rounded px-2 py-1"
+                class="mr-1 w-5/6 text-2xl text-gray-800 rounded px-2 py-1"
                 v-model="name"
                 placeholder="Añade un nuevo jugador"
             >
 
             <button
-                class="ml-1 bg-blue-500 text-white font-semibold p-2 rounded"
+                class="w-1/6 ml-1 bg-blue-500 text-xl text-white font-bold rounded"
                 @click="add"
-                v-if="name.length"
             >
-                Add
+                <font-awesome-icon icon="plus" />
             </button>
         </div>
 
