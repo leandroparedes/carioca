@@ -90,6 +90,14 @@ export default new Vuex.Store({
                     time: player.timeLeft != null && player.timeLeft >= 0 ? player.timeLeft : gameTime * 60
                 });
             });
+        },
+        clear_timers ({ commit, state }) {
+            state.players.forEach(player => {
+                commit('set_timer_for_player', {
+                    playerId: player.id,
+                    time: null
+                });
+            });
         }
     },
     getters: {

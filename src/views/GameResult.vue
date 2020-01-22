@@ -68,6 +68,8 @@ export default {
                 game: this.$store.getters.gameById(this.$store.state.currentGameId).name,
                 scores: this.scores
             });
+
+            this.$store.dispatch('clear_timers');
         },
         setNextPlayer: function () {
             const nextRotatingPlayer = this.$store.getters.playerById(this.$store.state.rotatingPlayerId + 1);
