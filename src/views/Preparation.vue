@@ -47,6 +47,7 @@
 <script>
 import { mapState } from 'vuex';
 import CountdownTimer from '@/components/CountdownTimer.vue';
+import shared from '@/shared';
 
 export default {
     beforeRouteEnter (to, from, next) {
@@ -58,6 +59,9 @@ export default {
         } else {
             next();
         }
+    },
+    created () {
+        shared.save();
     },
     data: function () {
         return {
