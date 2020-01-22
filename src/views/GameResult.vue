@@ -13,7 +13,7 @@
                 v-for="player in $store.state.players" :key="player.id"
                 class="flex justify-between mb-3 text-2xl font-semibold mb-4"
             >
-                <div class="w-4/6">{{ player.name }}</div>
+                <div class="w-4/6" :class="{'text-green-500': scores[player.name] < 1}">{{ player.name }}</div>
 
                 <input
                     type="number" min="0"
