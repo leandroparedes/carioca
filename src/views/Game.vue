@@ -50,6 +50,9 @@
                             :class="textColor(player.timeLeft)"
                         >
                             {{ player.name }}: {{ player.timeLeft | formatTime }}
+                            <span v-if="player.timeLeft == 260" class="ml-1">
+                                <font-awesome-icon icon="cannabis"/>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -151,6 +154,7 @@ export default {
             return {
                 'text-yellow-500': value <= 60 && value > 30,
                 'text-red-500': value <= 30,
+                'text-green-500': value == 260
             };
         }
     },
