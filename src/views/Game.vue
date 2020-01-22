@@ -8,6 +8,8 @@
                 <font-awesome-icon :icon="paused ? 'play' : 'pause'"/>
             </button>
 
+            <save-button class="text-2xl focus:outline-none text-gray-500"/>
+
             <button
                 class="text-2xl focus:outline-none text-gray-500"
                 @click="finishGame"
@@ -73,6 +75,7 @@
 
 <script>
 import CountdownTimer from '@/components/CountdownTimer.vue';
+import SaveButton from '@/components/SaveButton.vue';
 
 export default {
     beforeRouteEnter (to, from, next) {
@@ -85,7 +88,10 @@ export default {
             next();
         }
     },
-    components: { CountdownTimer },
+    components: {
+        CountdownTimer,
+        SaveButton
+    },
     data: function () {
         return {
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
