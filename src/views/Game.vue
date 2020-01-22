@@ -22,7 +22,7 @@
             class="min-w-full focus:outline-none"
             :disabled="paused"
         >
-            <div class="min-h-screen">
+            <div class="min-h-screen pt-8">
                 <h1 class="text-blue-500 text-4xl font-semibold">
                     {{ currentGame.name }}
                 </h1>
@@ -43,9 +43,13 @@
                         Perdiste
                     </div>
                 </div>
-                <div v-else>
-                    <div class="text-2xl font-semibold">Ganador</div>
-                    <div class="text-6xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
+                <div v-else class="text-green-500">
+                    <div class="text-6xl">
+                        <font-awesome-icon icon="crown" />
+                    </div>
+                    <div class="text-6xl font-bold -mt-4">
+                        {{ currentPlayer.name.toUpperCase() }}
+                    </div>
                 </div>
 
                 <div class="mt-4">
@@ -57,6 +61,8 @@
                         {{ player.name }}: {{ player.timeLeft | formatTime }}
                     </div>
                 </div>
+
+                <div class="mt-10 text-4xl font-thin px-10 text-gray-500">Toque para continuar</div>
             </div>
         </button>
     </div>
