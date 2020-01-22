@@ -22,7 +22,7 @@
             class="min-w-full focus:outline-none"
             :disabled="paused"
         >
-            <div class="min-h-screen pt-8">
+            <div class="min-h-screen pt-1">
                 <h1 class="text-blue-500 text-4xl font-semibold">
                     {{ currentGame.name }}
                 </h1>
