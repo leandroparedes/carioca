@@ -31,13 +31,15 @@
                 </h1>
 
                 <div v-if="!gameover">
-                    <div class="text-6xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
+                    <div class="text-6xl font-bold -mb-4" :class="textColor(currentPlayer.timeLeft)">{{ currentPlayer.name.toUpperCase() }}</div>
 
                     <countdown-timer
                         v-if="currentPlayer.timeLeft > 0"
                         :time="currentPlayer.timeLeft"
                         autoinit
                         :paused="paused"
+                        :warningTime="warningTime"
+                        :dangerTime="dangerTime"
                         @updatedTime="handleUpdatedTime"
                         @timeout="handleTimeout"
                         class="font-bold text-7xl"
@@ -97,6 +99,8 @@ export default {
         return {
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
             currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId),
+            warningTime: 60,
+            dangerTime: 30,
             gameover: false,
             paused: false,
             saving: false
@@ -167,8 +171,8 @@ export default {
         textColor: function (value) {
             // estos valores deberian conncidir con los warningTime y darngerTime del countdown-timer
             return {
-                'text-yellow-500': value <= 60 && value > 30,
-                'text-red-500': value <= 30,
+                'text-yellow-500': value <= this.warningTime && value > this.dangerTime,
+                'text-red-500': value <= this.dangerTime,
                 'text-green-500': value == 260
             };
         }
