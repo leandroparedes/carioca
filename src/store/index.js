@@ -68,6 +68,16 @@ export default new Vuex.Store({
             let player = state.players.find(player => player.id == data.playerId);
             player.timeLeft = data.time;
         },
+        set_player_score (state, data) {
+            let player = state.players.find(player => player.id == data.playerId);
+            let score = parseInt(data.score);
+
+            player.score = player.score + score;
+
+            if (score <= 0) {
+                player.gamesWon = player.gamesWon + 1;
+            }
+        },
         save_result (state, result) {
             state.results.push(result);
         }
@@ -98,6 +108,30 @@ export default new Vuex.Store({
                     time: null
                 });
             });
+        },
+        save_result ({ commit, getters }, result) {
+            const game = getters.gameById(result.gameId);
+
+            var finalResult = {
+                game: game,
+                scores: []
+            };
+
+            for (const [key, value] of Object.entries(result.scores)) {
+                var player = getters.playerById(key);
+
+                finalResult.scores.push({
+                    player: player.name,
+                    score: value
+                });
+
+                commit('set_player_score', {
+                    playerId: player.id,
+                    score: value
+                });
+            }
+
+            commit('save_result', finalResult);
         }
     },
     getters: {
@@ -123,6 +157,9 @@ export default new Vuex.Store({
         },
         winner: (state) => {
             return state.players.filter(player => player.timeLeft > 0)[0];
+        },
+        winnerOfTheGame: (state) => {
+            return state.players.filter(player => player.score <= 0)[0];
         }
     },
     modules: {

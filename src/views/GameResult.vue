@@ -13,11 +13,11 @@
                 v-for="player in $store.state.players" :key="player.id"
                 class="flex justify-between mb-3 text-2xl font-semibold mb-4"
             >
-                <div class="w-4/6" :class="{'text-green-500': scores[player.name] < 1}">{{ player.name }}</div>
+                <div class="w-4/6" :class="{'text-green-500': scores[player.id] < 1}">{{ player.name }}</div>
 
                 <input
                     type="number" min="0"
-                    v-model.number="scores[player.name]"
+                    v-model.number="scores[player.id]"
                     class="w-2/6 px-2 py-1 text-gray-800 rounded text-center"
                 >
             </div>
@@ -66,10 +66,12 @@ export default {
                 return false;
             }
 
-            this.$store.commit('save_result', {
-                game: this.$store.getters.gameById(this.$store.state.currentGameId).name,
+            let result = {
+                gameId: this.$store.state.currentGameId,
                 scores: this.scores
-            });
+            };
+
+            this.$store.dispatch('save_result', result);
 
             this.$store.dispatch('clear_timers');
 

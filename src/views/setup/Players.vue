@@ -76,6 +76,7 @@ export default {
                     id: this.players.length + 1,
                     name: this.name,
                     score: 0,
+                    gamesWon: 0,
                     timeLeft: null
                 });
 
