@@ -159,7 +159,9 @@ export default new Vuex.Store({
             return state.players.filter(player => player.timeLeft > 0)[0];
         },
         winnerOfTheGame: (state) => {
-            return state.players.filter(player => player.score <= 0)[0];
+            return state.players.reduce(function(prev, curr) {
+                return prev.score < curr.score ? prev : curr;
+            });
         }
     },
     modules: {
