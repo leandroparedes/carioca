@@ -1,17 +1,18 @@
 <template>
     <div>
-        <div class="flex justify-between p-2" v-if="!gameover">
+        <div class="flex justify-between p-2 text-gray-500 text-2xl" v-if="!gameover">
             <button
-                class="text-2xl focus:outline-none text-gray-500"
+                class="focus:outline-none"
                 @click="togglePause"
             >
                 <font-awesome-icon :icon="paused ? 'play' : 'pause'"/>
             </button>
 
-            <save-button class="text-2xl focus:outline-none text-gray-500"/>
+            <save-button v-if="!saving" class="focus:outline-none" @saved="handleSave"/>
+            <div v-else class="flex items-center font-semibold">Guardando...</div>
 
             <button
-                class="text-2xl focus:outline-none text-gray-500"
+                class="focus:outline-none"
                 @click="finishGame"
             >
                 <font-awesome-icon icon="check"/>
@@ -97,7 +98,8 @@ export default {
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
             currentPlayer: this.$store.getters.playerById(this.$store.state.currentPlayerId),
             gameover: false,
-            paused: false
+            paused: false,
+            saving: false
         };
     },
     created () {
@@ -116,6 +118,13 @@ export default {
             this.savePlayerCurrentTime();
 
             this.checkWinner(1500);
+        },
+        handleSave: function () {
+            this.saving = true;
+
+            setTimeout(() => {
+                this.saving = false;
+            }, 2000);
         },
         togglePause: function () {
             this.paused = !this.paused;

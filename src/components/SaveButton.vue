@@ -15,6 +15,8 @@ export default {
             const path = this.$router.currentRoute.path;
 
             localStorage.savegame = JSON.stringify({ store, path });
+
+            this.$emit('saved');
         },
         load: function () {
             const savegame = JSON.parse(localStorage.savegame);
