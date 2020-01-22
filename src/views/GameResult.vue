@@ -5,7 +5,7 @@
         </h1>
 
         <div class="text-center text-lg text-gray-400 font-semibold mb-10">
-            Juego {{ currentGame.id }} &#183; <span class="text-green-500">{{ currentGame.name }}</span>
+            Juego {{ currentGame.id }} &#183; {{ currentGame.name }}
         </div>
 
         <div class="px-10">
@@ -34,7 +34,7 @@
 
             <button
                 @click.once="$router.go(-1)"
-                class="text-left text-red-500 font-semibold pt-2 text-center mt-5"
+                class="text-blue-500 text-xl font-semibold text-center mt-5"
             >
                 Volver atrás
             </button>
