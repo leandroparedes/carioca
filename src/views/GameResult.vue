@@ -93,7 +93,7 @@ export default {
 
             if (nextGame) {
                 this.$store.commit('set_current_game', nextGame.id);
-                this.$router.push(`/game/${nextGame.id}`);
+                this.$router.push('/preparation');
             } else {
                 this.$router.push('/results');
                 this.$store.commit('game_over');
