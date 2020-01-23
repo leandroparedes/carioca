@@ -15,7 +15,7 @@
             >
                 <div
                     class="w-4/6 text-2xl"
-                    :class="{'text-green-500': scores[player.id] < 1}"
+                    :class="{'text-green-500': scores[player.id] == 0}"
                 >
                     {{ player.name }}
                 </div>
@@ -28,7 +28,9 @@
             </div>
         </div>
 
-        <div class="flex flex-col mt-10 px-10">
+        <div v-if="error" class="text-center text-red-500 font-semibold mt-8">{{ error }}</div>
+
+        <div class="flex flex-col mt-5 px-10">
             <button
                 @click="continueGame"
                 class="btn btn-lg btn-green"
@@ -53,7 +55,8 @@ export default {
         return {
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
             scores: {},
-            loading: false
+            loading: false,
+            error: null
         };
     },
     methods: {
@@ -65,8 +68,23 @@ export default {
         },
         saveResults: function () {
             this.loading = true;
+            this.error = null;
 
             if (Object.entries(this.scores).length < this.$store.state.players.length) {
+                this.loading = false;
+                return false;
+            }
+
+            let values = [];
+
+            Object.entries(this.scores).forEach(score => {
+                values.push(score[1]);
+            });
+
+            let filtered = values.filter(v => v <= 0);
+
+            if (filtered.length == 0 || filtered.length > 1) {
+                this.error = "Solamente un jugador debe tener score 0."
                 this.loading = false;
                 return false;
             }
