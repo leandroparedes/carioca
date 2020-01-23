@@ -17,28 +17,28 @@
        
         <div
             v-for="game in games" :key="game.id"
-            class="flex justify-between mb-3 text-2xl font-semibold"
+            class="flex justify-between mb-3 font-semibold"
         >
-            <div class="w-5/6">{{ game.name }}</div>
+            <div class="w-5/6 text-2xl">{{ game.name }}</div>
 
             <input
                 type="number" min="1"
                 v-model="game.time"
-                class="w-1/6 px-2 py-1 text-gray-800 rounded text-center"
+                class="w-1/6 text-center input input-lg"
             >
         </div>
 
         <div class="flex my-10">
             <input
                 type="text"
-                class="mr-1 w-3/4 text-2xl text-gray-800 rounded px-2 py-1"
+                class="mr-1 w-3/4 input input-lg"
                 v-model.trim="name"
                 placeholder="Ej: 2 Trios"
             >
 
             <input
                 type="text"
-                class="mx-1 w-1/4 text-2xl text-gray-800 rounded px-2 py-1"
+                class="mx-1 w-1/4 input input-lg"
                 v-model.trim="shortname"
                 placeholder="2T"
             >

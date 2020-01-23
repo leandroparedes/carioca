@@ -1,0 +1,13 @@
+.input {
+    @apply text-gray-800 rounded px-2 py-1;
+}
+
+.input-sm {
+    @apply text-lg;
+}
+.input-md {
+    @apply text-xl;
+}
+.input-lg {
+    @apply text-2xl;
+}

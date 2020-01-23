@@ -22,9 +22,9 @@
             <input
                 type="text" 
                 ref="player"
-                class="mr-1 w-5/6 text-2xl text-gray-800 rounded px-2 py-1"
+                class="mr-1 w-5/6 input input-lg"
                 v-model="name"
-                placeholder="Añade un nuevo jugador"
+                placeholder="Nuevo jugador"
             >
 
             <button

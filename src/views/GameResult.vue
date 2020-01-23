@@ -11,14 +11,19 @@
         <div class="px-10">
             <div
                 v-for="player in $store.state.players" :key="player.id"
-                class="flex justify-between mb-3 text-2xl font-semibold mb-4"
+                class="flex justify-between mb-3 font-semibold"
             >
-                <div class="w-4/6" :class="{'text-green-500': scores[player.id] < 1}">{{ player.name }}</div>
+                <div
+                    class="w-4/6 text-2xl"
+                    :class="{'text-green-500': scores[player.id] < 1}"
+                >
+                    {{ player.name }}
+                </div>
 
                 <input
                     type="number" min="0"
                     v-model.number="scores[player.id]"
-                    class="w-2/6 px-2 py-1 text-gray-800 rounded text-center"
+                    class="w-2/6 text-center input input-lg"
                 >
             </div>
         </div>
