@@ -11,7 +11,7 @@
         <div class="px-10">
             <div
                 v-for="player in $store.state.players" :key="player.id"
-                class="flex justify-between mb-3 font-semibold"
+                class="flex justify-between mb-6 font-semibold"
             >
                 <div
                     class="w-4/6 text-2xl"
