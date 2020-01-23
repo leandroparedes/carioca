@@ -14,6 +14,7 @@
             <button
                 class="focus:outline-none"
                 @click="finishGame"
+                v-if="currentPlayer.timeLeft > 0"
             >
                 <font-awesome-icon icon="check"/>
             </button>
