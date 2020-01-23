@@ -1,23 +1,30 @@
 <template>
     <div>
-        <div class="flex justify-between p-2 text-gray-500 text-2xl" v-if="!gameover">
-            <button
-                class="focus:outline-none"
-                @click="togglePause"
-            >
-                <font-awesome-icon :icon="paused ? 'play' : 'pause'"/>
-            </button>
+        <div class="flex p-2 text-gray-500 text-2xl" v-if="!gameover">
+            <div class="flex-1 text-left">
+                <button
+                    class="focus:outline-none"
+                    @click="togglePause"
+                    v-if="currentPlayer.timeLeft > 0"
+                >
+                    <font-awesome-icon :icon="paused ? 'play' : 'pause'"/>
+                </button>
+            </div>
 
-            <save-button v-if="!saving" class="focus:outline-none" @click.native="handleSave"/>
-            <div v-else class="flex items-center font-semibold">Guardando...</div>
+            <div class="flex-1 text-center">
+                <save-button v-if="!saving" class="focus:outline-none" @click.native="handleSave"/>
+                <div v-else class="flex items-center font-semibold">Guardando...</div>
+            </div>
 
-            <button
-                class="focus:outline-none"
-                @click="finishGame"
-                v-if="currentPlayer.timeLeft > 0"
-            >
-                <font-awesome-icon icon="check"/>
-            </button>
+            <div class="flex-1 text-right">
+                <button
+                    class="focus:outline-none"
+                    @click="finishGame"
+                    v-if="currentPlayer.timeLeft > 0"
+                >
+                    <font-awesome-icon icon="check"/>
+                </button>
+            </div>
         </div>
 
         <button
