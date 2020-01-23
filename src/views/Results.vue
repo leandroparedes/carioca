@@ -17,7 +17,7 @@
         </div>
 
         <div
-            class="bg-gray-900 shadow-lg rounded p-4 mt-5 border" :class="index + 2 == 2 ? 'mx-4 border-gray-300' : 'mx-8 border-yellow-800'"
+            class="bg-gray-900 shadow-lg rounded-lg p-4 mt-5 border" :class="index + 2 == 2 ? 'mx-4 border-gray-300' : 'mx-8 border-yellow-800'"
             v-for="(player, index) in playersWithoutWinner" :key="player.id"
         >
             <div class="font-semibold">
