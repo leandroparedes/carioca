@@ -28,7 +28,7 @@
             >
 
             <button
-                class="w-1/6 ml-1 bg-blue-500 text-xl text-white font-bold rounded"
+                class="w-1/6 ml-1 btn btn-md btn-blue"
                 @click="add"
             >
                 <font-awesome-icon icon="plus" />
@@ -40,7 +40,7 @@
             class="mt-10 text-center"
         >
             <button
-                class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
+                class="btn btn-lg btn-green"
                 @click="next"
                 :disabled="loading"
             >

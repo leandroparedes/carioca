@@ -29,14 +29,14 @@
 
         <button
             v-if="!autoinit"
-            class="bg-blue-500 text-white text-2xl font-bold px-3 py-1 rounded"
+            class="btn btn-lg btn-blue"
             @click="autoinit = true"
         >
             Iniciar tiempo
         </button>
         <button
             v-else
-            class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
+            class="btn btn-lg btn-green"
             @click="$router.push(`/game/${currentGame.id}`)"
         >
             Continuar al juego

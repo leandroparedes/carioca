@@ -26,7 +26,7 @@
         <div class="flex flex-col mt-10 px-10">
             <button
                 @click="continueGame"
-                class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
+                class="btn btn-lg btn-green"
                 :disabled="loading"
             >
                 {{ loading ? 'Guardando' : 'Continuar' }}

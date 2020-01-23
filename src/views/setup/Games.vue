@@ -5,8 +5,8 @@
         </h1>
 
         <div class="mb-4 flex justify-center">
-            <button class="bg-green-500 text-white rounded px-2 py-1 font-semibold mr-2" @click="games.forEach(game => game.time++)"><font-awesome-icon icon="clock"/> +1</button>
-            <button class="bg-red-500 text-white rounded px-2 py-1 font-semibold ml-2" @click="games.forEach(game => game.time--)"><font-awesome-icon icon="clock"/> -1</button>
+            <button class="btn btn-sm btn-green mr-2" @click="games.forEach(game => game.time++)"><font-awesome-icon icon="clock"/> +1</button>
+            <button class="btn btn-sm btn-red ml-2" @click="games.forEach(game => game.time--)"><font-awesome-icon icon="clock"/> -1</button>
         </div>
 
         <div class="flex justify-between text-gray-400 mb-5">
@@ -44,7 +44,7 @@
             >
 
             <button
-                class="w-1/6 ml-1 bg-blue-500 text-xl text-white font-bold rounded"
+                class="w-1/6 ml-1 btn btn-md btn-blue"
                 @click="add"
             >
                 <font-awesome-icon icon="plus" />
@@ -53,7 +53,7 @@
 
         <div class="text-center">
             <button
-                class="bg-green-500 text-white text-2xl font-bold px-3 py-1 rounded"
+                class="btn btn-lg btn-green"
                 @click="next"
                 :disabled="loading"
             >

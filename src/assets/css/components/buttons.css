@@ -1,0 +1,26 @@
+.btn {
+    @apply font-bold px-3 py-1 rounded;
+}
+.btn:focus {
+    @apply outline-none;
+}
+
+.btn-sm {
+    @apply text-lg
+}
+.btn-md {
+    @apply text-xl
+}
+.btn-lg {
+    @apply text-2xl;
+}
+
+.btn-blue {
+    @apply bg-blue-500 text-white;
+}
+.btn-green {
+    @apply bg-green-500 text-white ;
+}
+.btn-red {
+    @apply bg-red-500 text-white ;
+}
