@@ -10,11 +10,10 @@
         </div>
 
         <div class="flex justify-between text-gray-400 mb-5">
-            <div>Juego</div>
-            <div>Minutos</div>
+            <div class="w-5/6">Juego</div>
+            <div class="w-1/6">Minutos</div>
         </div>
 
-       
         <div
             v-for="game in games" :key="game.id"
             class="flex justify-between mb-3 font-semibold"
