@@ -147,6 +147,8 @@ export default {
                 this.$router.push('/results');
                 this.$store.commit('game_over');
             }
+
+            this.$store.dispatch('clear_timers');
         }
     },
     computed: {
