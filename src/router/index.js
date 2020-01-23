@@ -58,6 +58,8 @@ router.beforeEach((to, from, next) => {
     const store = require('@/store').default;
     const router = require('@/router').default;
 
+    window.scrollTo(0, 0);
+
     if (store.state.globalStatus.gameOver && to.path != '/results') {
         router.push('/results');
     } else {
