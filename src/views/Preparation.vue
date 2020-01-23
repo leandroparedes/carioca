@@ -15,7 +15,7 @@
         </div>
 
         <div class="-mt-3 mb-8">
-            <button @click="togglePause" class="focus:outline-none">
+            <button @click="togglePause" class="focus:outline-none" :disabled="!autoinit">
                 <countdown-timer
                     :time="initialTime"
                     :autoinit="autoinit"
@@ -25,7 +25,7 @@
                     class="text-7xl font-bold"
                 />
             </button>
-            <div class="-mt-4 font-semibold">Tocar para pausar</div>
+            <div class="-mt-4 font-semibold" v-if="autoinit">Tocar para pausar</div>
         </div>
 
         <button
