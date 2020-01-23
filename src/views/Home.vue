@@ -1,12 +1,12 @@
 <template>
     <div class="text-center flex flex-col">
         <h1 class="text-6xl font-bold pt-10">Carioca</h1>
-        <div>
+        <div class="mt-10">
             <button
-                class="bg-blue-500 text-white text-4xl font-bold rounded px-8 py-2 mt-10"
+                class="border-8 border-blue-500 text-blue-500 text-4xl rounded-full w-32 h-32"
                 @click="play"
             >
-                Jugar
+                <font-awesome-icon icon="play" class="ml-2"/>
             </button>
         </div>
         
