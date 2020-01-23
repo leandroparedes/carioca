@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
+
+.heading {
+    @apply text-blue-500 text-4xl font-semibold;
+}
+
 @tailwind utilities;

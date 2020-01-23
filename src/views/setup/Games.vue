@@ -1,6 +1,6 @@
 <template>
     <div class="px-10 pb-10">
-        <h1 class="text-blue-500 text-4xl font-semibold text-center py-5">
+        <h1 class="heading text-center py-5">
             Juegos <span v-if="games.length">({{ games.length }})</span>
         </h1>
 

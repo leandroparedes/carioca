@@ -1,6 +1,6 @@
 <template>
     <div class="px-10 pb-10">
-        <h1 class="text-center text-blue-500 text-4xl font-semibold pt-2 mb-2">
+        <h1 class="heading text-center pt-5">
             Resultados
         </h1>
 

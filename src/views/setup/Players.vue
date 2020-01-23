@@ -1,6 +1,6 @@
 <template>
     <div class="px-10">
-        <h1 class="text-blue-500 text-4xl font-semibold text-center py-5">
+        <h1 class="heading text-center py-5">
             Jugadores <span v-if="players.length">({{ players.length }})</span>
         </h1>
 

@@ -27,7 +27,7 @@
         >
             <div class="min-h-screen pt-1">
                 <div v-if="!gameover">
-                    <h1 class="text-blue-500 text-4xl font-semibold pt-5">
+                    <h1 class="heading pt-5">
                         {{ currentGame.name }}
                     </h1>
                     <div class="text-6xl font-bold -mb-4" :class="textColor(currentPlayer.timeLeft)">{{ currentPlayer.name.toUpperCase() }}</div>
