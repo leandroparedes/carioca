@@ -1,5 +1,5 @@
 <template>
-    <div class="px-10 pb-10 text-center">
+    <div class="px-8 pb-10 text-center">
         <h1 class="heading py-5">
             Resultados
         </h1>
@@ -17,7 +17,7 @@
         </div>
 
         <div
-            class="bg-gray-900 shadow-lg rounded p-4 mt-5 mx-4"
+            class="bg-gray-900 shadow-lg rounded p-4 mt-5 border" :class="index + 2 == 2 ? 'mx-4 border-gray-300' : 'mx-8 border-yellow-800'"
             v-for="(player, index) in playersWithoutWinner" :key="player.id"
         >
             <div class="font-semibold">
