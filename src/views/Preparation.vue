@@ -14,7 +14,7 @@
             <div class="text-4xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
         </div>
 
-        <div class="-mt-3 mb-8">
+        <div class="-mt-3 mb-4">
             <button @click="togglePause" class="focus:outline-none" :disabled="!autoinit">
                 <countdown-timer
                     :time="initialTime"
@@ -25,7 +25,7 @@
                     class="text-7xl font-bold"
                 />
             </button>
-            <div class="-mt-4 font-semibold" v-if="autoinit">Tocar para pausar</div>
+            <div class="-mt-4 font-semibold mb-8" v-if="autoinit">Tocar para pausar</div>
         </div>
 
         <button
