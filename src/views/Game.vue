@@ -29,7 +29,6 @@
 
         <button
             @click="finishTurn"
-            :class="{ 'opacity-25': paused }"
             class="min-w-full focus:outline-none"
             :disabled="paused"
         >

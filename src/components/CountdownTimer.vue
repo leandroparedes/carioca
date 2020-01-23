@@ -1,5 +1,5 @@
 <template>
-    <div :class="statusColor">
+    <div :class="classObject">
         {{ initialTime | formatTime }}
     </div>
 </template>
@@ -72,7 +72,31 @@ export default {
                 'text-yellow-500': this.initialTime <= this.warningTime && this.initialTime > this.dangerTime,
                 'text-red-500': this.initialTime <= this.dangerTime
             };
+        },
+        classObject: function () {
+            return {
+                'text-yellow-500': this.initialTime <= this.warningTime && this.initialTime > this.dangerTime,
+                'text-red-500': this.initialTime <= this.dangerTime,
+                'blink': this.paused
+            };
         }
     },
 }
 </script>
+
+<style scoped>
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+@-webkit-keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+.blink {
+    animation: blink 1s step-start 0s infinite;
+    -webkit-animation: blink 1s step-start 0s infinite;
+}
+</style>
