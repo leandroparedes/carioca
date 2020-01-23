@@ -4,7 +4,7 @@
             <router-view/>
         </div>
         <div v-if="$store.state.globalStatus.gameInit" class="text-center py-3">
-            <button class="text-red-500 font-semibold text-xl focus:outline-none" @click="exit">Exit Game</button>
+            <button class="btn btn-sm btn-red" @click="exit">Salir</button>
         </div>
     </div>
 </template>
