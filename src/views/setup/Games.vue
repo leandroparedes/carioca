@@ -6,7 +6,7 @@
 
         <div class="mb-4 flex justify-center">
             <button class="btn btn-sm btn-green mr-2" @click="games.forEach(game => game.time++)"><font-awesome-icon icon="clock"/> +1</button>
-            <button class="btn btn-sm btn-red ml-2" @click="games.forEach(game => game.time--)"><font-awesome-icon icon="clock"/> -1</button>
+            <button class="btn btn-sm btn-red ml-2" @click="substractTime"><font-awesome-icon icon="clock"/> -1</button>
         </div>
 
         <div class="flex justify-between text-gray-400 mb-5">
@@ -121,6 +121,9 @@ export default {
             this.$store.commit('game_init');
 
             this.$router.push('/preparation');
+        },
+        substractTime: function () {
+            this.games.forEach(game => game.time > 1 ? game.time-- : game.time = 1);
         }
     }
 }
