@@ -1,6 +1,6 @@
 <template>
     <div class="text-center flex flex-col">
-        <h1 class="text-6xl font-bold pt-10">Carioca</h1>
+        <h1 class="text-6xl font-semibold pt-10">Cariocart</h1>
         <div class="mt-10">
             <button
                 class="border-8 border-blue-500 text-blue-500 text-4xl rounded-full w-32 h-32"
