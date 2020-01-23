@@ -11,8 +11,9 @@
         </div>
         
         <div class="mt-10 text-gray-600" v-if="savegameExists">
-            <save-button mode="load" class="text-4xl" />
-            <div class="font-semibold text-lg">Cargar juego</div>
+            <save-button mode="load" class="text-4xl">
+                <div class="font-semibold text-lg">Cargar juego</div>
+            </save-button>
         </div>
     </div>
 </template>

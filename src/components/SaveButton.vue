@@ -1,6 +1,9 @@
 <template>
     <button v-on="mode == 'save' ? { click: save } : { click: load }">
-        <font-awesome-icon icon="save"/>
+        <div>
+            <font-awesome-icon icon="save"/>
+        </div>
+        <slot></slot>
     </button>
 </template>
 
