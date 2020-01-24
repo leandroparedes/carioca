@@ -13,7 +13,7 @@
 
             <div class="flex-1 text-center">
                 <save-button v-if="!saving" class="focus:outline-none" @click.native="handleSave"/>
-                <div v-else class="flex items-center font-semibold">Guardando...</div>
+                <div v-else>Guardando...</div>
             </div>
 
             <div class="flex-1 text-right">
