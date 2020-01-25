@@ -3,7 +3,7 @@
 
         <button
             @click="$modal.show('results')"
-            class="absolute top-0 right-0 pt-2 pr-2 text-2xl text-gray-500"
+            class="absolute top-0 right-0 mt-2 mr-2 text-2xl text-gray-500"
         >
             <font-awesome-icon icon="calculator"/>
         </button>
