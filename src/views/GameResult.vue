@@ -8,8 +8,8 @@
             <font-awesome-icon icon="calculator"/>
         </button>
 
-        <modal name="results" :width="300" :height="430" @before-close="beforeClose">
-            <div class="bg-gray-800 w-full h-full rounded-none p-4">
+        <modal name="results" :width="300" :height="430">
+            <div class="bg-gray-900 w-full h-full rounded-none p-4 border border-green-500">
                 <div class="text-center text-green-500 text-lg font-semibold mb-4">
                     Guardando el score de {{ $store.getters.playerById(selectedForScore).name.toUpperCase() }}
                 </div>
@@ -221,9 +221,6 @@ export default {
 
             const playerId = this.$refs['player-' + this.selectedForScore][0].id;
             this.scores[playerId] = this.playerScore;
-            this.cardsOnHand = '';
-        },
-        beforeClose: function () {
             this.cardsOnHand = '';
             this.playerScore = 0;
         },
