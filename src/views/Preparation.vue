@@ -11,7 +11,7 @@
 
         <div>
             <div class="text-gray-400 text-lg">Juega</div>
-            <div class="text-4xl font-bold text-green-500">{{ currentPlayer.name.toUpperCase() }}</div>
+            <div class="text-4xl font-bold text-green-500 break-all">{{ currentPlayer.name.toUpperCase() }}</div>
         </div>
 
         <div class="-mt-3 mb-4">

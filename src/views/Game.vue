@@ -37,7 +37,7 @@
                     <h1 class="heading pt-5">
                         {{ currentGame.name }}
                     </h1>
-                    <div class="text-6xl font-bold -mb-4" :class="textColor(currentPlayer.timeLeft)">{{ currentPlayer.name.toUpperCase() }}</div>
+                    <div class="text-6xl font-bold -mb-4 break-all" :class="textColor(currentPlayer.timeLeft)">{{ currentPlayer.name.toUpperCase() }}</div>
 
                     <countdown-timer
                         v-if="currentPlayer.timeLeft > 0"
