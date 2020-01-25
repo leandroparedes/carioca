@@ -1,5 +1,61 @@
 <template>
-    <div class="px-10 pb-10">
+    <div class="px-10 pb-10 relative">
+
+        <button
+            @click="$modal.show('results')"
+            class="absolute top-0 right-0 pt-2 pr-2 text-2xl text-gray-500"
+        >
+            <font-awesome-icon icon="calculator"/>
+        </button>
+
+        <modal name="results" :width="300" :height="430" @before-close="beforeClose">
+            <div class="bg-gray-800 w-full h-full rounded-none p-4">
+                <div class="text-center text-green-500 text-lg font-semibold mb-4">
+                    Guardando el score de {{ $store.getters.playerById(selectedForScore).name.toUpperCase() }}
+                </div>
+                
+                <div class="font-semibold text-gray-500 text-lg mb-2">Seleccione un jugador</div>
+                <select
+                    class="w-full block input input-lg mb-6 focus:outline-none"
+                    v-model="selectedForScore"
+                >
+                    <option
+                        v-for="player in playersWithoutSelected" :key="player.id"
+                        :value="player.id"
+                        selected
+                    >
+                        {{ player.name }}
+                    </option>
+                </select>
+
+                <div class="font-semibold text-gray-500 text-lg">Ingrese las cartas en mano</div>
+                <div class="text-gray-500 text-sm mb-2">Separadas por un espacio</div>
+                <input
+                    type="text"
+                    class="input input-lg w-full"
+                    placeholder="3 a j 4 j q k"
+                    v-model="cardsOnHand"
+                >
+            
+                <div class="text-2xl py-4 text-green-500 font-semibold text-center">
+                    Puntaje: {{ playerScore }}
+                </div>
+
+                <div class="text-center">
+                    <button
+                        class="btn btn-md btn-green mb-4"
+                        @click="saveScoreForPlayer"
+                    >
+                        Guardar score
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <button @click="closeModal" class="btn btn-sm btn-red">Cerrar</button>
+                </div>
+            </div>
+        </modal>
+
         <h1 class="heading text-center pt-5">
             Resultados
         </h1>
@@ -44,6 +100,8 @@
                     type="number" min="1"
                     v-model.number="scores[player.id]"
                     @change="errorMessage = null"
+                    :ref="'player-' + player.id"
+                    :id="player.id"
                     class="w-2/6 text-center input input-lg"
                 >
             </div>
@@ -83,8 +141,14 @@ export default {
             currentGame: this.$store.getters.gameById(this.$store.state.currentGameId),
             scores: {},
             loading: false,
-            errorMessage: null
+            errorMessage: null,
+            cardsOnHand: '',
+            playerScore: 0,
+            selectedForScore: null
         };
+    },
+    created () {
+        this.selectedForScore = this.playersWithoutSelected[0].id;
     },
     methods: {
         changeSelect: function () {
@@ -149,6 +213,45 @@ export default {
             }
 
             this.$store.dispatch('clear_timers');
+        },
+        saveScoreForPlayer: function () {
+            if (this.playerScore == 0) {
+                return;
+            }
+
+            const playerId = this.$refs['player-' + this.selectedForScore][0].id;
+            this.scores[playerId] = this.playerScore;
+            this.cardsOnHand = '';
+        },
+        beforeClose: function () {
+            this.cardsOnHand = '';
+            this.playerScore = 0;
+        },
+        closeModal: function () {
+            this.$modal.hide('results');
+        }
+    },
+    watch: {
+        cardsOnHand: function (value) {
+            const cards = value.trim().split(/\s+/);
+
+            let score = 0;
+
+            cards.forEach(card => {
+                let value;
+
+                switch (card) {
+                    case 'a': value = 20; break;
+                    case 'j': value = 10; break;
+                    case 'q': value = 10; break;
+                    case 'k': value = 10; break;
+                    default: value = parseInt(card); break;
+                }
+
+                score = score + value;
+            });
+
+            this.playerScore = score || 0;
         }
     },
     computed: {

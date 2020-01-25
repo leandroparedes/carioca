@@ -3,12 +3,38 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// vue modal setup
+import VModal from 'vue-js-modal';
+Vue.use(VModal);
+
 // fontawesome setup
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPause, faPlay, faCheck, faPlus, faCrown, faCannabis,faSave, faTrophy, faClock } from '@fortawesome/free-solid-svg-icons';
+
+import {
+    faPause,
+    faPlay,
+    faCheck,
+    faPlus,
+    faCrown,
+    faCannabis,faSave,
+    faTrophy,
+    faClock,
+    faCalculator
+} from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faPause, faPlay, faCheck, faPlus, faCrown, faCannabis,faSave, faTrophy, faClock);
+library.add(
+    faPause,
+    faPlay,
+    faCheck,
+    faPlus,
+    faCrown,
+    faCannabis,faSave,
+    faTrophy,
+    faClock,
+    faCalculator
+);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -22,7 +48,7 @@ Vue.filter('formatTime', function (value) {
 });
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')
