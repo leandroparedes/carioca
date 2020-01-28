@@ -8,8 +8,8 @@
             <font-awesome-icon icon="calculator"/>
         </button>
 
-        <modal name="results" :width="300" :height="430">
-            <div class="bg-gray-900 w-full h-full rounded-none p-4 border border-green-500">
+        <modal name="results" width="90%" height="auto" :clickToClose="false" :adaptive="true">
+            <div class="bg-gray-800 w-full h-full rounded p-4">
                 <div class="text-center text-green-500 text-lg font-semibold mb-4">
                     Guardando el score de {{ $store.getters.playerById(selectedForScore).name.toUpperCase() }}
                 </div>
@@ -261,3 +261,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .v--modal-overlay {
+        background: rgba(0, 0, 0, 0.6);
+    }
+</style>
