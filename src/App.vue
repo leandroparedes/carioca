@@ -1,12 +1,20 @@
 <template>
-    <div id="app" class="bg-gray-800 text-gray-200">
-        <div class="min-h-screen">
-            <router-view/>
-        </div>
-        <div v-if="$store.state.globalStatus.gameInit" class="text-center py-3">
-            <button class="btn btn-sm btn-red" @click="exit">Salir</button>
-        </div>
-    </div>
+    <v-app>
+        <v-container>
+            <router-view style="min-height: 100vh"></router-view>
+
+            <div class="text-center">
+                <v-btn
+                    color="red"
+                    class=""
+                    small
+                    @click="exit"
+                >
+                    Reset
+                </v-btn>
+            </div>
+        </v-container>
+    </v-app>
 </template>
 
 <script>
