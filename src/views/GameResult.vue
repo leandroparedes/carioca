@@ -41,7 +41,7 @@
                 <input
                     type="text"
                     class="input input-lg w-full"
-                    placeholder="3 a j 4 j q k"
+                    placeholder="2 3 4 9 10 A J Q K"
                     ref="cards-input"
                     :value="cardsOnHand"
                     @input="cardsOnHand = $event.target.value"
