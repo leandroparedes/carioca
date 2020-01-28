@@ -1,13 +1,15 @@
 <template>
     <div class="text-center flex flex-col">
-        <h1 class="text-6xl font-semibold pt-10">Cariocart</h1>
+        <h1 class="display-3 mt-10">Cariocart</h1>
         <div class="mt-10">
-            <button
-                class="border-8 border-blue-500 text-blue-500 text-4xl rounded-full w-32 h-32"
+            <v-btn
+                color="success"
+                fab
+                x-large
                 @click="play"
             >
-                <font-awesome-icon icon="play" class="ml-2"/>
-            </button>
+                <v-icon>mdi-play</v-icon>
+            </v-btn>
         </div>
         
         <div class="mt-10 text-gray-600" v-if="savegameExists">
