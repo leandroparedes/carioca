@@ -8,7 +8,7 @@
             <font-awesome-icon icon="calculator"/>
         </button>
 
-        <modal name="results" width="90%" height="auto" :clickToClose="false" classes="rounded-lg">
+        <modal name="results" width="90%" height="auto" :clickToClose="false" classes="rounded-lg" :reset="true">
             <div class="bg-gray-800 w-full h-full rounded p-4 relative">
                 <button
                     @click="closeModal"
@@ -254,10 +254,18 @@ export default {
                 let value;
 
                 switch (card) {
-                    case 'a': value = 20; break;
-                    case 'j': value = 10; break;
-                    case 'q': value = 10; break;
-                    case 'k': value = 10; break;
+                    case 'a': 
+                    case 'A':
+                        value = 20; break;
+                    case 'j':
+                    case 'J':
+                        value = 10; break;
+                    case 'q':
+                    case 'Q':
+                        value = 10; break;
+                    case 'k':
+                    case 'K':
+                        value = 10; break;
                     default: value = parseInt(card); break;
                 }
 
