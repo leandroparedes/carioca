@@ -2,17 +2,33 @@
     <div class="games-setup px-10">
         <h1 class="headline text-center mt-5">Juegos</h1>
 
+        <div class="d-flex justify-space-between mt-5 mb-4">
+            <v-btn color="green" class="mr-2" @click="globalAddTime">
+                <v-icon>mdi-clock-outline</v-icon> <span class="ml-2">+ 0:30</span>
+            </v-btn>
+
+            <v-btn color="red" class="ml-2" @click="globalRemoveTime">
+                <v-icon>mdi-clock-outline</v-icon> <span class="ml-2">- 0:30</span>
+            </v-btn>
+        </div>
+
         <v-card
             v-for="game in games" :key="game.id"
-            class="d-flex justify-space-between align-center mt-5 pa-4"
+            class="d-flex justify-space-between align-center mt-5 py-4 pl-4 pr-2"
             raised
         >
             <div>{{ game.name }}</div>
 
             <div class="d-flex align-center">
-                <span class="green--text mr-4 font-weight-bold">
+                <v-btn text x-small color="red" fab @click="removeTime(game.id)" class="focus:outline-none">
+                    <v-icon>mdi-minus</v-icon>
+                </v-btn>
+                <span class="green--text mx-1 font-weight-bold">
                     {{ game.time | formatTime }}
                 </span>
+                <v-btn text x-small color="green" fab @click="addTime(game.id)" class="focus:outline-none">
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
             </div>
         </v-card>
 
@@ -152,6 +168,26 @@ export default {
             this.$store.commit('game_init');
 
             this.$router.push('/preparation');
+        },
+        globalAddTime() {
+            this.games.forEach(game => game.time += 30);
+        },
+        globalRemoveTime() {
+            this.games.forEach(game => {
+                if (game.time > 30) {
+                    game.time -= 30;
+                }
+            });
+        },
+        removeTime: function (gameID) {
+            let game = this.games.find(game => game.id == gameID);
+            if (game.time >= 30) {
+                game.time -= 30;
+            }
+        },
+        addTime: function (gameID) {
+            let game = this.games.find(game => game.id == gameID);
+            game.time += 30;
         }
     }
 }
