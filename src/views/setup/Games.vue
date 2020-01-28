@@ -1,63 +1,82 @@
 <template>
-    <div class="px-10 pb-10">
-        <h1 class="heading text-center py-5">
-            Juegos <span v-if="games.length">({{ games.length }})</span>
-        </h1>
+    <div class="games-setup px-10">
+        <h1 class="headline text-center mt-5">Juegos</h1>
 
-        <div class="mb-4 flex justify-center">
-            <button class="btn btn-sm btn-green mr-2" @click="games.forEach(game => game.time++)"><font-awesome-icon icon="clock"/> +1</button>
-            <button class="btn btn-sm btn-red ml-2" @click="substractTime"><font-awesome-icon icon="clock"/> -1</button>
-        </div>
-
-        <div class="flex justify-between text-gray-400 mb-5">
-            <div class="w-5/6">Juego</div>
-            <div class="w-1/6">Minutos</div>
-        </div>
-
-        <div
+        <v-card
             v-for="game in games" :key="game.id"
-            class="flex justify-between mb-3 font-semibold"
+            class="d-flex justify-space-between align-center mt-5 pa-4"
+            raised
         >
-            <div class="w-5/6 text-2xl">{{ game.name }}</div>
+            <div>{{ game.name }}</div>
 
-            <input
-                type="number" min="1"
-                v-model="game.time"
-                class="w-1/6 text-center input input-lg"
-            >
-        </div>
+            <div class="d-flex align-center">
+                <span class="green--text mr-4 font-weight-bold">
+                    {{ game.time | formatTime }}
+                </span>
+            </div>
+        </v-card>
 
-        <div class="flex my-10">
-            <input
-                type="text"
-                class="mr-1 w-3/4 input input-lg"
-                v-model.trim="name"
-                placeholder="Ej: 2 Trios"
-            >
+        <v-form
+            ref="form"
+            v-model="valid"
+            :lazy-validation="lazy"
+            autocomplete="off"
+            class="mt-6"
+        >
+            <v-container>
+                <v-row>
+                    <v-col cols="8">
+                        <v-text-field
+                            v-model="name"
+                            ref="name"
+                            :counter="20"
+                            label="Nombre del juego"
+                            placeholder="2 Trios"
+                            :rules="nameRules"
+                            required
+                            autocomplete="off"
+                        ></v-text-field>
+                    </v-col>
 
-            <input
-                type="text"
-                class="mx-1 w-1/4 input input-lg"
-                v-model.trim="shortname"
-                placeholder="2T"
-            >
+                    <v-col cols="4">
+                        <v-text-field
+                            v-model="shortname"
+                            ref="shortname"
+                            :counter="5"
+                            label="Nombre corto"
+                            placeholder="2T"
+                            :rules="shortnameRules"
+                            required
+                            autocomplete="off"
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
+            </v-container>
 
-            <button
-                class="w-1/6 ml-1 btn btn-md btn-blue"
-                @click="add"
-            >
-                <font-awesome-icon icon="plus" />
-            </button>
-        </div>
+            <v-btn
+                    :disabled="!valid"
+                    color="primary"
+                    block
+                    @click.prevent="add"
+                    class="mt-5"
+                >
+                    Añadir juego
+                </v-btn>
+        </v-form>
 
-        <div class="text-center">
-            <button
-                class="btn btn-lg btn-green"
-                @click="next"
-                :disabled="loading"
-            >
-                {{ loading ? 'Guardando' : 'Continuar' }}
-            </button>
+        <v-btn
+            color="success"
+            class="mt-8"
+            block
+            x-large
+            @click.prevent="save"
+            :loading="loading"
+        >
+            Continuar <v-icon class="ml-2">mdi-arrow-right-circle</v-icon>
+        </v-btn>
+
+        <div class="text-center mt-10">
+            <router-link to="/">Volver atrás</router-link>
         </div>
     </div>
 </template>
@@ -79,35 +98,48 @@ export default {
             name: '',
             shortname: '',
             games: [
-                { id: 1, name: '2 Trios', shortname: '2T', time: 5 },
-                { id: 2, name: '1 Trio 1 Escala', shortname: '1T 1E', time: 5 },
-                { id: 3, name: '2 Escalas', shortname: '2E', time: 5 },
-                { id: 4, name: '3 Trios', shortname: '3T', time: 5 },
-                { id: 5, name: '2 Trios 1 Escala', shortname: '2T 1E', time: 5 },
-                { id: 6, name: '2 Escalas 1 Trio', shortname: '2E 1T', time: 5 },
-                { id: 7, name: '4 Trios', shortname: '4T', time: 5 },
-                { id: 8, name: '3 Escalas', shortname: '3E', time: 5 },
-                { id: 9, name: 'Escala sucia', shortname: 'ES', time: 5 },
-                { id: 10, name: 'Escala real', shortname: 'ER', time: 5 },
+                { id: 1, name: '2 Trios', shortname: '2T', time: 300 },
+                { id: 2, name: '1 Trio 1 Escala', shortname: '1T 1E', time: 300 },
+                { id: 3, name: '2 Escalas', shortname: '2E', time: 300 },
+                { id: 4, name: '3 Trios', shortname: '3T', time: 300 },
+                { id: 5, name: '2 Trios 1 Escala', shortname: '2T 1E', time: 300 },
+                { id: 6, name: '2 Escalas 1 Trio', shortname: '2E 1T', time: 300 },
+                { id: 7, name: '4 Trios', shortname: '4T', time: 300 },
+                { id: 8, name: '3 Escalas', shortname: '3E', time: 300 },
+                { id: 9, name: 'Escala sucia', shortname: 'ES', time: 300 },
+                { id: 10, name: 'Escala real', shortname: 'ER', time: 300 },
             ],
-            loading: false
+            loading: false,
+
+            valid: true,
+            lazy: false,
+            nameRules: [
+                v => !!v || 'Debe ingresar un nombre',
+                v => (v && v.length <= 20) || 'El nombre no puede tener más de 20 caracteres',
+                v => !this.games.find(g => g.name.toLowerCase() == v) || 'El nombre ya fue ingresado'
+            ],
+            shortnameRules: [
+                v => !!v,
+                v => (v && v.length <= 5),
+                v => !this.games.find(g => g.shortname.toLowerCase() == v)
+            ]
         }
     },
     methods: {
         add: function () {
-            if (this.name.length && this.shortname.length) {
+            if (this.$refs.form.validate()) {
                 this.games.push({
                     id: this.games.length + 1,
-                    name: this.name.charAt(0).toUpperCase() + this.name.slice(1),
-                    shortname: this.shortname.toUpperCase(),
-                    time: 5
+                    name: this.name,
+                    shortname: this.shortname,
+                    time: 300
                 });
-                
+
                 this.name = '';
                 this.shortname = '';
             }
         },
-        next: function () {
+        save: function () {
             this.loading = true;
             this.$store.dispatch('set_games', this.games);
             this.$store.commit('games_setup_complete');
@@ -120,9 +152,6 @@ export default {
             this.$store.commit('game_init');
 
             this.$router.push('/preparation');
-        },
-        substractTime: function () {
-            this.games.forEach(game => game.time > 1 ? game.time-- : game.time = 1);
         }
     }
 }
