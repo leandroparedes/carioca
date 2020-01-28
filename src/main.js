@@ -19,7 +19,8 @@ import {
     faCannabis,faSave,
     faTrophy,
     faClock,
-    faCalculator
+    faCalculator,
+    faTimes
 } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -33,7 +34,8 @@ library.add(
     faCannabis,faSave,
     faTrophy,
     faClock,
-    faCalculator
+    faCalculator,
+    faTimes
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

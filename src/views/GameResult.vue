@@ -9,9 +9,16 @@
         </button>
 
         <modal name="results" width="90%" height="auto" :clickToClose="false" classes="rounded-lg">
-            <div class="bg-gray-800 w-full h-full rounded p-6">
-                <div class="text-center text-green-500 text-lg font-semibold mb-4">
-                    Guardando el score de {{ $store.getters.playerById(selectedForScore).name.toUpperCase() }}
+            <div class="bg-gray-800 w-full h-full rounded p-4 relative">
+                <button
+                    @click="closeModal"
+                    class="absolute top-0 right-0 mt-1 mr-3 text-2xl text-red-500"
+                >
+                    <font-awesome-icon icon="times"/>
+                </button>
+
+                <div class="text-center text-blue-500 text-2xl font-semibold mb-4">
+                    Guardar puntaje
                 </div>
                 
                 <div class="font-semibold text-gray-500 text-lg mb-2">Seleccione un jugador</div>
@@ -51,10 +58,6 @@
                     >
                         Guardar puntaje de {{ $store.getters.playerById(selectedForScore).name }}
                     </button>
-                </div>
-
-                <div class="text-center">
-                    <button @click="closeModal" class="btn btn-sm btn-red">Cerrar</button>
                 </div>
             </div>
         </modal>
