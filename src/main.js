@@ -41,6 +41,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 // tailwind css file
 import '@/assets/css/main.css'
 
+import './registerServiceWorker'
+
 Vue.config.productionTip = false
 
 Vue.filter('formatTime', function (value) {
