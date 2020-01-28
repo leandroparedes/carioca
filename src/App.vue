@@ -3,7 +3,7 @@
         <v-container>
             <router-view style="min-height: 100vh"></router-view>
 
-            <div class="text-center">
+            <div class="text-center mt-12 mb-5">
                 <v-btn
                     color="red"
                     class=""
