@@ -181,7 +181,7 @@ export default {
         },
         removeTime: function (gameID) {
             let game = this.games.find(game => game.id == gameID);
-            if (game.time >= 30) {
+            if (game.time > 30) {
                 game.time -= 30;
             }
         },
