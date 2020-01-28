@@ -1,20 +1,18 @@
 <template>
-    <div class="px-10 pb-10 text-center">
-        <h1 class="heading py-5">
-            Preparación
-        </h1>
+    <div class="preparation px-10">
+        <h1 class="headline text-center mt-5">Preparacion</h1>
 
-        <div class="mb-3">
+        <div class="mb-3 text-center mt-5">
             <div class="text-gray-400 text-lg">Próximo juego</div>
             <div class="text-4xl font-bold">{{ currentGame.name }}</div>
         </div>
 
-        <div>
+        <div class="text-center mt-5">
             <div class="text-gray-400 text-lg">Juega</div>
             <div class="text-4xl font-bold text-green-500 break-all">{{ currentPlayer.name.toUpperCase() }}</div>
         </div>
 
-        <div class="-mt-3 mb-4">
+        <div class="-mt-3 mb-4 text-center">
             <button @click="togglePause" class="focus:outline-none" :disabled="!autoinit">
                 <countdown-timer
                     :time="initialTime"
@@ -28,20 +26,24 @@
             <div class="-mt-4 font-semibold mb-8" v-if="autoinit">Tocar para pausar</div>
         </div>
 
-        <button
+        <v-btn
             v-if="!autoinit"
-            class="btn btn-lg btn-blue"
+            color="primary"
+            x-large
             @click="autoinit = true"
+            block
         >
             Iniciar tiempo
-        </button>
-        <button
+        </v-btn>
+        <v-btn
             v-else
-            class="btn btn-lg btn-green"
+            color="success"
+            x-large
             @click="$router.push(`/game/${currentGame.id}`)"
+            block
         >
             Continuar al juego
-        </button>
+        </v-btn>
     </div>
 </template>
 
