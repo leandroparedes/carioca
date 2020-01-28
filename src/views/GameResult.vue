@@ -22,6 +22,7 @@
                     <option
                         v-for="player in playersWithoutSelected" :key="player.id"
                         :value="player.id"
+                        :ref="'score-player-' + player.id"
                         selected
                     >
                         {{ player.name }}
@@ -34,7 +35,9 @@
                     type="text"
                     class="input input-lg w-full"
                     placeholder="3 a j 4 j q k"
-                    v-model="cardsOnHand"
+                    ref="cards-input"
+                    :value="cardsOnHand"
+                    @input="cardsOnHand = $event.target.value"
                 >
             
                 <div class="text-2xl py-4 text-green-500 font-semibold text-center">
@@ -46,7 +49,7 @@
                         class="btn btn-md btn-green mb-4"
                         @click="saveScoreForPlayer"
                     >
-                        Guardar score
+                        Guardar puntaje de {{ $store.getters.playerById(selectedForScore).name }}
                     </button>
                 </div>
 
@@ -223,6 +226,16 @@ export default {
             this.scores[playerId] = this.playerScore;
             this.cardsOnHand = '';
             this.playerScore = 0;
+
+            if (this.$refs['score-player-' + this.selectedForScore][0].nextSibling) {
+                this.selectedForScore = this.$refs['score-player-' + this.selectedForScore][0].nextSibling.value;
+
+                this.$nextTick(() => {
+                    this.$refs['cards-input'].focus();
+                });
+            } else {
+                this.closeModal();
+            }
         },
         closeModal: function () {
             this.$modal.hide('results');
