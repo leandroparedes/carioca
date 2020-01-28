@@ -1,51 +1,80 @@
 <template>
-    <div class="px-10">
-        <h1 class="heading text-center py-5">
-            Jugadores <span v-if="players.length">({{ players.length }})</span>
-        </h1>
+    <div class="players-setup px-10">
+        <h1 class="headline text-center mt-5">Jugadores</h1>
 
-        <div
-            v-if="!players.length"
-            class="text-2xl font-thin text-center text-gray-400"
+        <v-card
+            v-for="(player, index) in players" :key="player.id"
+            class="d-flex justify-space-between align-center mt-5 pa-4"
+            raised
         >
-            No hay jugadores registrados
-        </div>
-        <div
-            v-else
-            v-for="player in players" :key="player.id"
-            class="text-3xl font-semibold"
-        >
-            {{ player.id }}. {{ player.name }}
-        </div>
+            <div>
+                <span class="grey--text mr-1">#{{ index + 1 }}</span> {{ player.name }}
+            </div>
 
-        <div class="flex mt-10">
-            <input
-                type="text" 
-                ref="player"
-                class="mr-1 w-5/6 input input-lg"
+            <div>
+                 <v-chip
+                    v-if="index == 0"
+                    class="pa-2 mr-2"
+                    small
+                    color="green"
+                >
+                    Juega
+                </v-chip>
+
+                <v-btn
+                    icon
+                    color="red"
+                    x-small
+                    @click="remove(player.id)"
+                >
+                    <v-icon>mdi-close</v-icon>
+                </v-btn>
+            </div>
+        </v-card>
+
+        <v-form
+            ref="form"
+            v-model="valid"
+            :lazy-validation="lazy"
+            autocomplete="off"
+            class="mt-8"
+        >
+            <v-text-field
                 v-model="name"
-                placeholder="Nuevo jugador"
-            >
+                ref="name"
+                :counter="10"
+                label="Nombre del jugador"
+                :rules="nameRules"
+                required
+                v-on:keydown.enter.prevent="add"
+                autocomplete="off"
+            ></v-text-field>
 
-            <button
-                class="w-1/6 ml-1 btn btn-md btn-blue"
-                @click="add"
+            <v-btn
+                :disabled="!valid"
+                color="primary"
+                class="mt-8"
+                block
+                @click.prevent="add"
             >
-                <font-awesome-icon icon="plus" />
-            </button>
-        </div>
+                Añadir jugador
+            </v-btn>
+        </v-form>
 
-        <div
+        <v-btn
             v-if="players.length >= 2"
-            class="mt-10 text-center"
+            color="success"
+            class="mt-8"
+            block
+            x-large
+            @click.prevent="save"
+            :loading="loading"
         >
-            <button
-                class="btn btn-lg btn-green"
-                @click="next"
-                :disabled="loading"
-            >
-                {{ loading ? 'Guardando' : 'Continuar' }}
-            </button>
+            Continuar <v-icon class="ml-2">mdi-arrow-right-circle</v-icon>
+        </v-btn>
+
+        <div class="text-center mt-10">
+            <router-link to="/">Volver atrás</router-link>
         </div>
     </div>
 </template>
@@ -66,12 +95,20 @@ export default {
         return {
             name: '',
             players: [],
-            loading: false
+            loading: false,
+
+            valid: true,
+            lazy: false,
+            nameRules: [
+                v => !!v || 'Debe ingresar un nombre',
+                v => (v && v.length <= 10) || 'El nombre no puede tener más de 10 caracteres',
+                v => !this.players.find(p => p.name == v) || 'El nombre ya fue ingresado'
+            ]
         }
     },
     methods: {
         add: function () {
-            if (this.name.length) {
+            if (this.$refs.form.validate()) {
                 this.players.push({
                     id: this.players.length + 1,
                     name: this.name,
@@ -82,12 +119,13 @@ export default {
 
                 this.name = '';
 
-                this.$nextTick(() => {
-                    this.$refs.player.focus();
-                });
+                this.$nextTick(() => this.$refs.name.focus());
             }
         },
-        next: function () {
+        remove: function (playerID) {
+            this.players = this.players.filter(player => player.id != playerID);
+        },
+        save: function () {
             this.loading = true;
             this.$store.dispatch('set_players', this.players);
             this.$store.commit('players_setup_complete');
