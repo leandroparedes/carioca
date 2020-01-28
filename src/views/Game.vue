@@ -50,7 +50,7 @@
                         @timeout="handleTimeout"
                         class="font-bold text-7xl"
                     />
-                    <div v-else class="mt-2 font-semibold text-red-500 text-6xl">
+                    <div v-else class="mt-2 font-semibold red--text text-6xl">
                         Perdiste
                     </div>
 
@@ -190,9 +190,9 @@ export default {
         },
         textColor: function (value) {
             return {
-                'text-yellow-500': value <= this.warningTime && value > this.dangerTime,
-                'text-red-500': value <= this.dangerTime,
-                'text-green-500': value == 260
+                'yellow--text': value <= this.warningTime && value > this.dangerTime,
+                'red--text': value <= this.dangerTime,
+                'green--text': value == 260
             };
         }
     },

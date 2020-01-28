@@ -67,16 +67,10 @@ export default {
         }
     },
     computed: {
-        statusColor: function () {
-            return {
-                'text-yellow-500': this.initialTime <= this.warningTime && this.initialTime > this.dangerTime,
-                'text-red-500': this.initialTime <= this.dangerTime
-            };
-        },
         classObject: function () {
             return {
-                'text-yellow-500': this.initialTime <= this.warningTime && this.initialTime > this.dangerTime,
-                'text-red-500': this.initialTime <= this.dangerTime,
+                'yellow--text': this.initialTime <= this.warningTime && this.initialTime > this.dangerTime,
+                'red--text': this.initialTime <= this.dangerTime,
                 'blink': this.paused
             };
         }
