@@ -44,6 +44,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 import '@/assets/css/main.css'
 
 import './registerServiceWorker'
+import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
@@ -54,5 +55,6 @@ Vue.filter('formatTime', function (value) {
 new Vue({
     router,
     store,
+    vuetify,
     render: h => h(App)
 }).$mount('#app')
