@@ -8,8 +8,8 @@
             <font-awesome-icon icon="calculator"/>
         </button>
 
-        <modal name="results" width="90%" height="auto" :clickToClose="false" :adaptive="true">
-            <div class="bg-gray-800 w-full h-full rounded p-4">
+        <modal name="results" width="90%" height="auto" :clickToClose="false" classes="rounded-lg">
+            <div class="bg-gray-800 w-full h-full rounded p-6">
                 <div class="text-center text-green-500 text-lg font-semibold mb-4">
                     Guardando el score de {{ $store.getters.playerById(selectedForScore).name.toUpperCase() }}
                 </div>
@@ -249,6 +249,9 @@ export default {
             });
 
             this.playerScore = score || 0;
+        },
+        playersWithoutSelected: function () {
+            this.selectedForScore = this.playersWithoutSelected[0].id;
         }
     },
     computed: {
