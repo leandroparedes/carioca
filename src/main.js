@@ -20,7 +20,9 @@ import {
     faTrophy,
     faClock,
     faCalculator,
-    faTimes
+    faTimes,
+    faMinus,
+    faRedo
 } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -35,7 +37,9 @@ library.add(
     faTrophy,
     faClock,
     faCalculator,
-    faTimes
+    faTimes,
+    faMinus,
+    faRedo
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

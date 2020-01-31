@@ -4,27 +4,35 @@
             Juegos <span v-if="games.length">({{ games.length }})</span>
         </h1>
 
-        <div class="mb-4 flex justify-center">
-            <button class="btn btn-sm btn-green mr-2" @click="games.forEach(game => game.time++)"><font-awesome-icon icon="clock"/> +1</button>
-            <button class="btn btn-sm btn-red ml-2" @click="substractTime"><font-awesome-icon icon="clock"/> -1</button>
-        </div>
-
-        <div class="flex justify-between text-gray-400 mb-5">
-            <div class="w-5/6">Juego</div>
-            <div class="w-1/6">Minutos</div>
+        <div class="mb-8 flex justify-center">
+            <button class="btn btn-sm btn-green mr-2" @click="addTimeGlobal">
+                <font-awesome-icon icon="clock"/> + 0:30
+            </button>
+            <button class="btn btn-sm btn-blue" @click="resetTimes">
+                <font-awesome-icon icon="redo"/>
+            </button>
+            <button class="btn btn-sm btn-red ml-2" @click="substractTimeGlobal">
+                <font-awesome-icon icon="clock"/> - 0:30
+            </button>
         </div>
 
         <div
             v-for="game in games" :key="game.id"
-            class="flex justify-between mb-3 font-semibold"
+            class="bg-gray-900 rounded shadow-lg p-3 flex justify-between mb-3 font-semibold"
         >
-            <div class="w-5/6 text-2xl">{{ game.name }}</div>
+            <div class="w-5/6 text-xl">{{ game.name }}</div>
 
-            <input
-                type="number" min="1"
-                v-model="game.time"
-                class="w-1/6 text-center input input-lg"
-            >
+            <div class="flex">
+                <button class="focus:outline-none text-red-500" @click="removeTime(game.id)">
+                    <font-awesome-icon icon="minus"/>
+                </button>
+
+                <div class="text-xl mx-2">{{ game.time | formatTime }}</div>
+
+                <button class="focus:outline-none text-green-500" @click="addTime(game.id)">
+                    <font-awesome-icon icon="plus"/>
+                </button>
+            </div>
         </div>
 
         <div class="flex my-10">
@@ -79,16 +87,16 @@ export default {
             name: '',
             shortname: '',
             games: [
-                { id: 1, name: '2 Trios', shortname: '2T', time: 5 },
-                { id: 2, name: '1 Trio 1 Escala', shortname: '1T 1E', time: 5 },
-                { id: 3, name: '2 Escalas', shortname: '2E', time: 5 },
-                { id: 4, name: '3 Trios', shortname: '3T', time: 5 },
-                { id: 5, name: '2 Trios 1 Escala', shortname: '2T 1E', time: 5 },
-                { id: 6, name: '2 Escalas 1 Trio', shortname: '2E 1T', time: 5 },
-                { id: 7, name: '4 Trios', shortname: '4T', time: 5 },
-                { id: 8, name: '3 Escalas', shortname: '3E', time: 5 },
-                { id: 9, name: 'Escala sucia', shortname: 'ES', time: 5 },
-                { id: 10, name: 'Escala real', shortname: 'ER', time: 5 },
+                { id: 1, name: '2 Trios', shortname: '2T', time: 300 },
+                { id: 2, name: '1 Trio 1 Escala', shortname: '1T 1E', time: 300 },
+                { id: 3, name: '2 Escalas', shortname: '2E', time: 300 },
+                { id: 4, name: '3 Trios', shortname: '3T', time: 300 },
+                { id: 5, name: '2 Trios 1 Escala', shortname: '2T 1E', time: 300 },
+                { id: 6, name: '2 Escalas 1 Trio', shortname: '2E 1T', time: 300 },
+                { id: 7, name: '4 Trios', shortname: '4T', time: 300 },
+                { id: 8, name: '3 Escalas', shortname: '3E', time: 300 },
+                { id: 9, name: 'Escala sucia', shortname: 'ES', time: 300 },
+                { id: 10, name: 'Escala real', shortname: 'ER', time: 300 },
             ],
             loading: false
         }
@@ -100,7 +108,7 @@ export default {
                     id: this.games.length + 1,
                     name: this.name.charAt(0).toUpperCase() + this.name.slice(1),
                     shortname: this.shortname.toUpperCase(),
-                    time: 5
+                    time: 300
                 });
                 
                 this.name = '';
@@ -121,8 +129,32 @@ export default {
 
             this.$router.push('/preparation');
         },
-        substractTime: function () {
-            this.games.forEach(game => game.time > 1 ? game.time-- : game.time = 1);
+        addTimeGlobal: function () {
+            this.games.forEach(game => {
+                game.time += 30;
+            })
+        },
+        substractTimeGlobal: function () {
+            this.games.forEach(game => {
+                if (game.time > 30) {
+                    game.time -= 30;
+                }
+            });
+        },
+        removeTime: function (gameID) {
+            let game = this.games.find(game => game.id == gameID);
+            if (game.time > 30) {
+                game.time -= 30;
+            }
+        },
+        addTime: function (gameID) {
+            let game = this.games.find(game => game.id == gameID);
+            game.time += 30;
+        },
+        resetTimes: function () {
+            this.games.forEach(game => {
+                game.time = 300;
+            });
         }
     }
 }
