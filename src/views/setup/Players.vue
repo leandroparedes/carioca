@@ -81,7 +81,11 @@ export default {
     },
     methods: {
         add: function () {
-            if (this.name.length) {
+            let player = this.players.find(player => {
+                return player.name == this.name.toLowerCase();
+            });
+
+            if (this.name.length && !player) {
                 this.players.push({
                     id: this.players.length + 1,
                     name: this.name,
