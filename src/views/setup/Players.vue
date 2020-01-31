@@ -12,10 +12,14 @@
         </div>
         <div
             v-else
-            v-for="player in players" :key="player.id"
-            class="text-3xl font-semibold"
+            v-for="(player, index) in players" :key="player.id"
+            class="bg-gray-900 rounded shadow-lg p-3 mb-3 flex justify-between"
         >
-            {{ player.id }}. {{ player.name }}
+            <div class="text-xl font-semibold">
+                <span class="text-gray-500 text-sm mr-2">#{{ player.id }}</span> {{ player.name }}
+            </div>
+
+            <span v-if="index == 0" class="flex rounded-full mt-1 bg-green-500 uppercase px-2 py-1 text-xs font-bold mr-2">Juega</span>
         </div>
 
         <div class="flex mt-10">
