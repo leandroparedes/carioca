@@ -19,7 +19,13 @@
                 <span class="text-gray-500 text-sm mr-2">#{{ player.id }}</span> {{ player.name }}
             </div>
 
-            <span v-if="index == 0" class="flex rounded-full mt-1 bg-green-500 uppercase px-2 py-1 text-xs font-bold mr-2">Juega</span>
+            <div class="flex">
+                <span v-if="index == 0" class="flex rounded-full my-1 bg-green-500 uppercase text-xs font-bold p-1">Juega</span>
+
+                <button class="text-red-500 ml-4 mr-2 text-xl focus:outline-none" @click="deletePlayer(player.id)">
+                    <font-awesome-icon icon="times"/>
+                </button>
+            </div>
         </div>
 
         <div class="flex mt-10">
@@ -96,6 +102,14 @@ export default {
             this.$store.dispatch('set_players', this.players);
             this.$store.commit('players_setup_complete');
             this.$router.push('/setup/games');
+        },
+        deletePlayer: function (playerID) {
+            this.players = this.players.filter(player => player.id != playerID);
+
+            let count = 1;
+            this.players.forEach(player => {
+                player.id = count++;
+            });
         }
     }
 }
