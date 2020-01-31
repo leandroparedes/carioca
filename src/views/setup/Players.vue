@@ -20,7 +20,7 @@
             </div>
 
             <div class="flex">
-                <span v-if="index == 0" class="flex rounded-full my-1 bg-green-500 uppercase text-xs font-bold p-1">Juega</span>
+                <span v-if="index == 0" class="flex rounded-full my-1 bg-green-500 uppercase text-xs font-bold py-1 px-2">Juega</span>
 
                 <button class="text-red-500 ml-4 mr-2 text-xl focus:outline-none" @click="deletePlayer(player.id)">
                     <font-awesome-icon icon="times"/>
