@@ -12,8 +12,24 @@
         
         <div class="mt-10 text-gray-600" v-if="savegameExists">
             <save-button mode="load" class="text-4xl">
-                <div class="font-semibold text-lg">Cargar juego</div>
+                <div class="font-semibold text-lg">Cargar juego local</div>
             </save-button>
+        </div>
+
+        <div class="flex mt-10 mx-10">
+            <input
+                type="text"
+                class="mr-1 w-5/6 input input-lg"
+                placeholder="GameID"
+                v-model="gameID"
+            >
+
+            <button
+                class="w-1/6 ml-1 btn btn-md btn-blue"
+                @click="loadRemoteGame"
+            >
+                <font-awesome-icon icon="save" />
+            </button>
         </div>
     </div>
 </template>
@@ -36,6 +52,19 @@ export default {
     methods: {
         play: function () {
             this.$router.push('/setup/players');
+        },
+        loadRemoteGame: function () {
+            if (this.gameID) {
+                fetch('/load-game/' + this.gameID).then(res => res.json()).then(data => {
+                    this.$store.replaceState(data.state);
+
+                    const { v4 } = require('uuid');
+                    this.$store.commit('set_game_id', v4());
+                    this.$router.push(data.path);
+                }).catch(err => {
+                    console.log('error');
+                });
+            }
         }
     }
 }

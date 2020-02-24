@@ -25,6 +25,17 @@ app.post('/save-game', function (req, res) {
     res.sendStatus(200);
 });
 
+app.get('/load-game/:gameID', function (req, res) {
+    let data = require('./game-data.json');
+    const gameData = data.games.find(game => game.gameID == req.params.gameID);
+
+    if (!gameData) {
+        res.sendStatus(404);
+    } else {
+        res.send(JSON.stringify(gameData));
+    }
+});
+
 app.get(/.*/, function (req, res) {
     res.sendfile(__dirname + "/dist/index.html");
 });
