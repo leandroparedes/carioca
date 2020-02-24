@@ -61,7 +61,7 @@ export default {
                     this.$store.commit('set_game_id', Math.random().toString(36).substring(7));
                     this.$router.push(data.path);
                 }).catch(err => {
-                    console.log('error');
+                    alert('No se ha encontrado el juego con el GameID indicado');
                 });
             }
         }
