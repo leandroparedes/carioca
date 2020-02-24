@@ -7,5 +7,15 @@ export default {
         const path = router.currentRoute.path;
 
         localStorage.savegame = JSON.stringify({ state, path });
+
+        fetch('/save-game', {
+            method: 'POST',
+            body: JSON.stringify({ gameID: state.gameID, state, path}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            console.log('success');
+        });
     }
 };

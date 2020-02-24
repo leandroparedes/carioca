@@ -34,7 +34,15 @@
         >
             <div class="min-h-screen pt-1">
                 <div v-if="!gameover">
-                    <h1 class="heading pt-5">
+                    <div
+                        v-if="paused"
+                        class="text-gray-600"
+                    >
+                        <p class="font-semibold">GameID</p>
+                        <p>{{ $store.state.gameID }}</p>
+                    </div>
+
+                    <h1 class="heading pt-3">
                         {{ currentGame.name }}
                     </h1>
                     <div class="text-6xl font-bold -mb-4 break-all" :class="textColor(currentPlayer.timeLeft)">{{ currentPlayer.name.toUpperCase() }}</div>

@@ -125,7 +125,7 @@ export default {
 
             this.$store.commit('set_rotating_player', 1);
 
-            this.$store.commit('game_init');
+            this.$store.dispatch('game_init');
 
             this.$router.push('/preparation');
         },

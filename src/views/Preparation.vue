@@ -42,6 +42,11 @@
         >
             Continuar al juego
         </button>
+
+        <div class="text-gray-600 mt-4">
+            <p class="font-semibold">GameID</p>
+            <p>{{ $store.state.gameID }}</p>
+        </div>
     </div>
 </template>
 

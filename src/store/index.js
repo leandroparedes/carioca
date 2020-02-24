@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     plugins: [createPersistedState()],
     state: {
+        gameID: null,
         globalStatus: {
             gameInit: false,
             playersSetupCompleted: false,
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     },
     mutations: {
         reset (state) {
+            state.gameID = null;
             state.globalStatus.gameInit = false;
             state.globalStatus.playersSetupCompleted = false;
             state.globalStatus.gamesSetupCompleted = false;
@@ -36,6 +38,9 @@ export default new Vuex.Store({
             state.rotatingPlayerId = null;
 
             state.results = [];
+        },
+        set_game_id (state, gameID) {
+            state.gameID = gameID;
         },
         game_init (state) {
             state.globalStatus.gameInit = true;
@@ -83,6 +88,11 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        game_init ({commit}) {
+            const { v4 } = require('uuid');
+            commit('game_init');
+            commit('set_game_id', v4());
+        },
         set_players ({ commit }, players) {
             players.forEach(player => {
                 commit('set_player', player);
