@@ -58,8 +58,7 @@ export default {
                 fetch('/load-game/' + this.gameID).then(res => res.json()).then(data => {
                     this.$store.replaceState(data.state);
 
-                    const { v4 } = require('uuid');
-                    this.$store.commit('set_game_id', v4());
+                    this.$store.commit('set_game_id', Math.random().toString(36).substring(7));
                     this.$router.push(data.path);
                 }).catch(err => {
                     console.log('error');

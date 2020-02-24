@@ -89,9 +89,8 @@ export default new Vuex.Store({
     },
     actions: {
         game_init ({commit}) {
-            const { v4 } = require('uuid');
             commit('game_init');
-            commit('set_game_id', v4());
+            commit('set_game_id', Math.random().toString(36).substring(7));
         },
         set_players ({ commit }, players) {
             players.forEach(player => {
