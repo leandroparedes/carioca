@@ -43,9 +43,9 @@
             Continuar al juego
         </button>
 
-        <div class="text-gray-600 mt-4">
-            <p class="font-semibold">GameID</p>
-            <p>{{ $store.state.gameID }}</p>
+        <div class="mt-4">
+            <p class="text-gray-600 font-semibold">GameID</p>
+            <p class="text-2xl font-bold text-green-500">{{ $store.state.gameID }}</p>
         </div>
     </div>
 </template>

@@ -34,12 +34,9 @@
         >
             <div class="min-h-screen pt-1">
                 <div v-if="!gameover">
-                    <div
-                        v-if="paused"
-                        class="text-gray-600"
-                    >
-                        <p class="font-semibold">GameID</p>
-                        <p>{{ $store.state.gameID }}</p>
+                    <div v-if="paused">
+                        <p class="text-gray-600 font-semibold">GameID</p>
+                        <p class="text-2xl font-bold text-green-500">{{ $store.state.gameID }}</p>
                     </div>
 
                     <h1 class="heading pt-3">
