@@ -11,7 +11,8 @@
                     <th class="border border-gray-800 px-4 py-3">GameID</th>
                     <th class="border border-gray-800 px-4 py-3">Jugadores</th>
                     <th class="border border-gray-800 px-4 py-3">Juegos</th>
-                    <th class="border border-gray-800 px-4 py-3">Opciones</th>
+                    <th class="border border-gray-800 px-4 py-3">Ultimo guardado</th>
+                    <th class="border border-gray-800 px-4 py-3"></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,9 @@
                     </td>
                     <td class="border border-gray-800 px-4 py-3 text-center" :title="makeGamesTitle(game.gameID)">
                         {{ game.state.results.length }} de {{ game.state.games.length }} juegos completados
+                    </td>
+                    <td class="border border-gray-800 px-4 py-3 text-center">
+                        {{ game.lastSave | moment('from', 'now') }}
                     </td>
                     <td class="border border-gray-800 px-4 py-3 text-center">
                         <button class="text-red-500 focus:outline-none" title="Eliminar savegame" @click="deleteSavegame(game.gameID)">

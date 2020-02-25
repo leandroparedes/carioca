@@ -10,7 +10,12 @@ export default {
 
         fetch('/save-game', {
             method: 'POST',
-            body: JSON.stringify({ gameID: state.gameID, state, path}),
+            body: JSON.stringify({
+                gameID: state.gameID,
+                state,
+                path,
+                lastSave: Date.now()
+            }),
             headers: {
                 'Content-Type': 'application/json'
             }

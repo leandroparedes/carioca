@@ -49,6 +49,14 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 // tailwind css file
 import '@/assets/css/main.css'
 
+// momentjs
+const moment = require('moment');
+require('moment/locale/es');
+
+Vue.use(require('vue-moment'), {
+    moment
+});
+
 import './registerServiceWorker'
 
 Vue.config.productionTip = false
