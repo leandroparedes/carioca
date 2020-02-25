@@ -58,6 +58,16 @@ app.delete('/game-data/:gameID', function (req, res) {
     res.send(JSON.stringify(req.params.gameID));
 });
 
+app.post('/login', function (req, res) {
+    const { username, password } = req.body;
+
+    if (username == process.env.USERNAME && password == process.env.PASSWORD) {
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(401);
+    }
+});
+
 app.get(/.*/, function (req, res) {
     res.sendfile(__dirname + "/dist/index.html");
 });

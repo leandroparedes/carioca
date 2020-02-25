@@ -23,7 +23,8 @@ import {
     faTimes,
     faMinus,
     faRedo,
-    faTrashAlt
+    faTrashAlt,
+    faPowerOff
 } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -41,7 +42,8 @@ library.add(
     faTimes,
     faMinus,
     faRedo,
-    faTrashAlt
+    faTrashAlt,
+    faPowerOff
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

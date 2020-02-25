@@ -8,6 +8,7 @@ import Game from '../views/Game.vue';
 import GameResult from '../views/GameResult.vue';
 import Results from '../views/Results.vue';
 import Admin from '../views/Admin.vue';
+import Auth from '../views/Auth.vue';
 
 Vue.use(VueRouter);
 
@@ -51,6 +52,11 @@ const routes = [
       path: '/admin',
       name: 'admin',
       component: Admin
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: Auth
     }
 ];
 

@@ -1,6 +1,11 @@
 <template>
     <div class="mx-8 lg:mx-32">
-        <h1 class="heading py-5">Savegames</h1>
+        <div class="flex justify-between pt-5 pb-5">
+            <h1 class="heading">Savegames</h1>
+            <button class="my-auto mt-3 text-2xl text-red-500" @click="logout" title="Cerrar sesión">
+                <font-awesome-icon icon="power-off"/>
+            </button>
+        </div>
 
         <table
             v-if="games.length"
@@ -50,6 +55,16 @@
 <script>
 export default {
     name: 'admin',
+    beforeRouteEnter (to, from, next) {
+        const store = require('@/store').default;
+        const router = require('@/router').default;
+
+        if (!store.state.isLoggedIn) {
+            router.push('/auth');
+        } else {
+            next();
+        }
+    },
     data: function () {
         return {
             games: []
@@ -93,6 +108,10 @@ export default {
                     this.games = this.games.filter(game => game.gameID != gameID);
                 });
             }
+        },
+        logout: function () {
+            this.$store.commit('is_logged_in', false);
+            this.$router.push('/auth');
         }
     }
 }

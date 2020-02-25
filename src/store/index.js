@@ -19,7 +19,8 @@ export default new Vuex.Store({
         currentGameId: null,
         currentPlayerId: null,
         rotatingPlayerId: null,
-        results: []
+        results: [],
+        isLoggedIn: false
     },
     mutations: {
         reset (state) {
@@ -38,6 +39,9 @@ export default new Vuex.Store({
             state.rotatingPlayerId = null;
 
             state.results = [];
+        },
+        is_logged_in (state, isLogged) {
+            state.isLoggedIn = isLogged;
         },
         set_game_id (state, gameID) {
             state.gameID = gameID;
