@@ -36,6 +36,28 @@ app.get('/load-game/:gameID', function (req, res) {
     }
 });
 
+app.get('/game-data', function (req, res) {
+    let data = require('./game-data.json');
+    res.send(JSON.stringify(data));
+});
+
+app.delete('/game-data/:gameID', function (req, res) {
+    let data = require('./game-data.json');
+
+    data.games = data.games.filter(game => game.gameID != req.params.gameID);
+
+    let jsonData = JSON.stringify(data, null, 4); // pretty json
+
+    const fs = require('fs');
+
+    fs.writeFile('game-data.json', jsonData, 'utf8', (err) => {
+        if (err) throw err;
+        console.log('delete completed');
+    });
+
+    res.send(JSON.stringify(req.params.gameID));
+});
+
 app.get(/.*/, function (req, res) {
     res.sendfile(__dirname + "/dist/index.html");
 });
