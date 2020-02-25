@@ -41,7 +41,8 @@ export default {
     components: { SaveButton },
     data: function () {
         return {
-            savegameExists: false
+            savegameExists: false,
+            gameID: ''
         };
     },
     created () {
