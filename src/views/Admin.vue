@@ -7,43 +7,45 @@
             </button>
         </div>
 
-        <table
+        <div
             v-if="games.length"
-            class="table-auto w-full bg-gray-900 shadow-lg rounded-lg"
+            class="overflow-x-auto"
         >
-            <thead class="text-blue-500">
-                <tr>
-                    <th class="border border-gray-800 px-4 py-3">GameID</th>
-                    <th class="border border-gray-800 px-4 py-3">Jugadores</th>
-                    <th class="border border-gray-800 px-4 py-3">Juegos</th>
-                    <th class="border border-gray-800 px-4 py-3">Ultimo guardado</th>
-                    <th class="border border-gray-800 px-4 py-3"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    v-for="game in games" :key="game.gameID"
-                >
-                    <td class="border border-gray-800 px-4 py-3 text-center font-semibold text-green-500">
-                        {{ game.gameID }}
-                    </td>
-                    <td class="border border-gray-800 px-4 py-3 text-center" :title="makePlayersTitle(game.gameID)">
-                        {{ game.state.players.length }} jugadores
-                    </td>
-                    <td class="border border-gray-800 px-4 py-3 text-center" :title="makeGamesTitle(game.gameID)">
-                        {{ game.state.results.length }} de {{ game.state.games.length }} juegos completados
-                    </td>
-                    <td class="border border-gray-800 px-4 py-3 text-center">
-                        {{ game.lastSave | moment('from', 'now') }}
-                    </td>
-                    <td class="border border-gray-800 px-4 py-3 text-center">
-                        <button class="text-red-500 focus:outline-none" title="Eliminar savegame" @click="deleteSavegame(game.gameID)">
-                            <font-awesome-icon icon="trash-alt"/>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table-auto w-full bg-gray-900 shadow-lg rounded-lg">
+                <thead class="text-blue-500">
+                    <tr>
+                        <th class="border border-gray-800 px-4 py-3">GameID</th>
+                        <th class="border border-gray-800 px-4 py-3">Jugadores</th>
+                        <th class="border border-gray-800 px-4 py-3">Juegos</th>
+                        <th class="border border-gray-800 px-4 py-3">Ultimo guardado</th>
+                        <th class="border border-gray-800 px-4 py-3"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        v-for="game in games" :key="game.gameID"
+                    >
+                        <td class="border border-gray-800 px-4 py-3 text-center font-semibold text-green-500">
+                            {{ game.gameID }}
+                        </td>
+                        <td class="border border-gray-800 px-4 py-3 text-center" :title="makePlayersTitle(game.gameID)">
+                            {{ game.state.players.length }} jugadores
+                        </td>
+                        <td class="border border-gray-800 px-4 py-3 text-center" :title="makeGamesTitle(game.gameID)">
+                            {{ game.state.results.length }} de {{ game.state.games.length }} juegos completados
+                        </td>
+                        <td class="border border-gray-800 px-4 py-3 text-center">
+                            {{ game.lastSave | moment('from', 'now') }}
+                        </td>
+                        <td class="border border-gray-800 px-4 py-3 text-center">
+                            <button class="text-red-500 focus:outline-none" title="Eliminar savegame" @click="deleteSavegame(game.gameID)">
+                                <font-awesome-icon icon="trash-alt"/>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div v-else>No hay savegames registrados.</div>
 
         <div class="text-blue-500 text-center pt-8">
