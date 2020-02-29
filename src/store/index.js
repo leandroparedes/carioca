@@ -153,6 +153,9 @@ export default new Vuex.Store({
         }
     },
     getters: {
+        gameStarted: (state) => {
+            return state.globalStatus.playersSetupCompleted || state.globalStatus.gamesSetupCompleted || state.globalStatus.gameInit;
+        },
         gameById: (state) => (id) => {
             return state.games.find(game => game.id == id);
         },

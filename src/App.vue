@@ -3,7 +3,7 @@
         <div class="min-h-screen">
             <router-view/>
         </div>
-        <div v-if="$store.state.globalStatus.gameInit" class="text-center py-3">
+        <div v-if="$store.getters.gameStarted" class="text-center py-3">
             <button class="btn btn-sm btn-red" @click="exit">Salir</button>
         </div>
     </div>
