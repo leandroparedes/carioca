@@ -38,7 +38,7 @@
         <button
             v-else
             class="btn btn-lg btn-green"
-            @click="$router.push(`/game/${currentGame.id}`)"
+            @click="handleTimeout"
         >
             Continuar al juego
         </button>
@@ -84,6 +84,7 @@ export default {
             this.initialTime = newTime;
         },
         handleTimeout: function () {
+            this.$store.commit('pause_game', false);
             this.$router.push(`/game/${this.currentGame.id}`);
         },
         togglePause: function () {
