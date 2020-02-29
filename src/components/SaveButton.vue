@@ -23,6 +23,8 @@ export default {
 
             this.$store.replaceState(savegame.state);
 
+            this.$store.commit('pause_game', true);
+
             this.$router.push(savegame.path);
         }
     }
