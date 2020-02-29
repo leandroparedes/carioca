@@ -96,6 +96,7 @@
 import CountdownTimer from '@/components/CountdownTimer.vue';
 import SaveButton from '@/components/SaveButton.vue';
 import shared from '@/shared';
+import { mapState } from 'vuex';
 
 export default {
     beforeRouteEnter (to, from, next) {
@@ -119,7 +120,6 @@ export default {
             warningTime: 60,
             dangerTime: 30,
             gameover: false,
-            paused: false,
             saving: false
         };
     },
@@ -154,7 +154,7 @@ export default {
             }, 1000);
         },
         togglePause: function () {
-            this.paused = !this.paused;
+            this.$store.commit('pause_game', !this.paused);
         },
         finishTurn: function () {
             if (this.$store.getters.playersLeftCount == 1) {
@@ -204,7 +204,10 @@ export default {
     computed: {
         playersWithoutCurrent: function () {
             return this.$store.state.players.filter(player => player.id != this.currentPlayer.id);
-        }
+        },
+        ...mapState({
+            paused: state => state.globalStatus.gamePaused
+        })
     }
 }
 </script>

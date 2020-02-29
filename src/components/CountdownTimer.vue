@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         handleAutoinit: function (autoinit) {
-            if (autoinit) {
+            if (autoinit && !this.paused) {
                 this.initInterval();
             } else {
                 clearInterval(this.timerInterval);
