@@ -191,6 +191,7 @@ export default {
             }
         },
         finishGame: function () {
+            this.$store.commit('pause_game', true);
             this.$router.push(`/game/${this.currentGame.id}/results`);
         },
         textColor: function (value) {
