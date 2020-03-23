@@ -157,7 +157,6 @@ export default {
             this.$store.commit('pause_game', !this.paused);
         },
         finishTurn: function () {
-            console.log('finish');
             if (this.$store.getters.playersLeftCount == 1) {
                 this.finishGame();
                 return;
