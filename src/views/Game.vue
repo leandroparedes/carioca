@@ -30,7 +30,7 @@
         <button
             @click="finishTurn"
             class="min-w-full focus:outline-none"
-            :disabled="paused"
+            :disabled="!gameover && paused"
         >
             <div class="min-h-screen pt-1">
                 <div v-if="!gameover">
@@ -157,6 +157,7 @@ export default {
             this.$store.commit('pause_game', !this.paused);
         },
         finishTurn: function () {
+            console.log('finish');
             if (this.$store.getters.playersLeftCount == 1) {
                 this.finishGame();
                 return;
