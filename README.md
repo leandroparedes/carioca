@@ -1,19 +1,12 @@
-# carioca
+# Cariocart
 
-## Project setup
-```
-npm install
-```
+Carioca es un popular juego de cartas chileno. Con **Cariocart** juega de una manera mas entretenida.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Ingresa los jugadores, configura los juegos y preparate a jugar.
+![Step 1](images/step_1.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Mientras juegas puedes pausar la partida y guardar el juego. Una vez terminada la partida anota los resultados del juego. Opcionalmente puedes usar la calculadora para calcular el puntaje de las cartas que tienes en la mano.
+![Step 2](images/step_2.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Ve los resultados de la partida.
+![Step 3](images/step_3.png)
