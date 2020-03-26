@@ -2,19 +2,24 @@
 
 Carioca es un popular juego de cartas chileno. Con **Cariocart** juega de una manera mas entretenida.
 
-### Ingresa los jugadores, configura los juegos y preparate a jugar.
+### Setup
+Ingresa los jugadores, configura los juegos y preparate a jugar. <br><br>
 ![Step 1](images/step_1.png)
 
-### Mientras juegas puedes pausar la partida y guardar el juego. Una vez terminada la partida anota los resultados del juego. Opcionalmente puedes usar la calculadora para calcular el puntaje de las cartas que tienes en la mano.
+### In-game
+Mientras juegas puedes pausar la partida y guardar el juego. Una vez terminada la partida anota los resultados del juego. Opcionalmente puedes usar la calculadora para calcular el puntaje de las cartas que tienes en la mano. <br><br>
 ![Step 2](images/step_2.png)
 
-### Ve los resultados de la partida.
+### Resultados de la partida
+Ve los resultados de la partida y de cada juego individual.
 ![Step 3](images/step_3.png)
 
-### Carga un savegame guardado en tu dispositivo local o desde otro dispositivo ingresando el GameID
+### Savegames
+Carga un savegame guardado en tu dispositivo local o desde otro dispositivo ingresando el GameID <br></br>
 ![Load Game](images/load_game.png)
 
-### Revisa los juegos guardados desde el panel de administración
+### Panel de administración
+Revisa los juegos guardados desde el panel de administración <br><br>
 
 * Credenciales:
   * Usuario: username
