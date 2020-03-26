@@ -10,3 +10,17 @@ Carioca es un popular juego de cartas chileno. Con **Cariocart** juega de una ma
 
 ### Ve los resultados de la partida.
 ![Step 3](images/step_3.png)
+
+### Carga un savegame guardado en tu dispositivo local o desde otro dispositivo ingresando el GameID
+![Load Game](images/load_game.png)
+
+### Revisa los juegos guardados desde el panel de administración
+
+* Credenciales:
+  * Usuario: username
+  * Contraseña: password
+
+![Admin](images/admin.png)
+
+### Información importante
+Debido a que Heroku Free se reinicia constantemente los datos no persisten mas allá de un día.
