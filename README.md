@@ -1,6 +1,6 @@
 # Cariocart
 
-Carioca es un popular juego de cartas chileno. Con **Cariocart** juega de una manera mas entretenida.
+[Carioca](https://es.wikipedia.org/wiki/Carioca_(juego)) es un popular juego de cartas chileno. Con **Cariocart** juega de una manera mas entretenida.
 
 ### Setup
 Ingresa los jugadores, configura los juegos y preparate a jugar. <br><br>
